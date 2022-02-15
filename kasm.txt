@@ -1,0 +1,25 @@
+Kasm UI Login Credentials
+
+------------------------------------
+  username: admin@kasm.local
+  password: U9Hn1TS2PSX18
+------------------------------------
+  username: user@kasm.local
+  password: kdxE0UnhNMyPt
+------------------------------------
+
+Kasm Database Credentials
+------------------------------------
+  username: kasmapp
+  password: NJbYlX87QFoQGadRQDIA
+------------------------------------
+
+Kasm Redis Credentials
+------------------------------------
+  password: eqZIteI2SZ2KWURP69R9
+------------------------------------
+
+Kasm Manager Token
+------------------------------------
+  password: rqD63eq7mxsjerQ0n7BN
+------------------------------------

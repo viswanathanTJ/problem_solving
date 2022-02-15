@@ -1,0 +1,17 @@
+import java.util.*;
+import java.io.*;
+
+class Main {
+    public static void main(String[] args) {
+      Scanner sn = new Scanner(System.in);
+      int l = sn.nextInt();
+      int r = sn.nextInt();
+      int even = 0, odd = 0;
+      if(r%2==0) r++;
+      for(int i=l+1;i<r;i++) {
+        if(i%2==1) odd += i;
+        else even +=i;
+      }
+      System.out.println(Math.abs(even-odd));
+    }
+}
