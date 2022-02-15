@@ -2,11 +2,7 @@
     "code-runner.executorMap":
     {
         "python": "cat input.txt | python $fullFileName",
-		// "java": "cd $dir && javac $fileName && cat ../input.txt | java $fileNameWithoutExt",
-		// "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && cat ../input.txt | $dir$fileNameWithoutExt",
-    },
-    "java.project.sourcePaths": [
-        "Java/Algorithms",
-        "Java"
-    ]
+		"java": "cd $dir && javac $fileName && cat ../input.txt | java $fileNameWithoutExt && cd ..",
+		"c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && cat ../input.txt | $dir$fileNameWithoutExt && cd ..",
+    }
 }
