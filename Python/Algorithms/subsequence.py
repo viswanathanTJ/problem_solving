@@ -1,6 +1,6 @@
 # Time Complexity O(n * 2 ^ n)
 import math
-
+# Entries n*(n+1)/2
 def printSubsequences(arr, n) :
 
 	# Number of subsequences is (2**n -1)
@@ -25,4 +25,20 @@ print( "All Non-empty Subsequences")
 
 printSubsequences(arr, n)
 
-# This code is contributed by Nikita Tiwari.
+'''
+1
+2
+1 2
+3
+1 3
+2 3
+1 2 3
+4
+1 4
+2 4
+1 2 4
+3 4
+1 3 4
+2 3 4
+1 2 3 4
+'''
