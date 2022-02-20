@@ -1,24 +1,16 @@
-n = '10200'
-# 1219
-k = 1
-# n, k = '10', 2
-def solve(num, k):
-    st = list()
-    for n in num:
-        if st:
-            print(st[-1], n)
-        else: print(n)
-        while st and k and st[-1] > n:
-            st.pop()
-            k -= 1
-        
-        if st or n != '0':
-            st.append(n)
-            
-    if k:
-        st = st[0:-k]
-        
-    return ''.join(st) or '0'
+def solve(intervals):
+    res = len(intervals)
+    intervals.sort(key=lambda x: x[0])
+    x, y = intervals[0]
+    for i in range(1, len(intervals)):
+        if x <= intervals[i][0] and intervals[i][1] <= y:
+            res -= 1
+            continue
+        if intervals[i][0] <= x and y <= intervals[i][1]:
+            res -= 1
+        x, y = intervals[i][0], intervals[i][1]
+    return res
 
-
-print(solve(n, k))
+intervals = [[1,4],[3,6],[2,8]]
+print(solve(intervals))
+print(solve([[1,4],[2,3]]))
