@@ -30,6 +30,7 @@ def characterReplacement(s, k):
 
 n, k = map(int,input().split())
 s = input()
+n = len(s)
 print(characterReplacement(s, k))
 
 # Q3 Longest Subarray
