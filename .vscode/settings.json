@@ -1,8 +1,10 @@
 {
-    "code-runner.executorMap":
-    {
-        "python": "cat input.txt | python $fullFileName",
-		"java": "cd $dir && javac $fileName && cat ../input.txt | java $fileNameWithoutExt && cd ..",
-		"c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && cat ../input.txt | $dir$fileNameWithoutExt && cd ..",
-    }
+  "code-runner.executorMap": {
+    "python": "cat input.txt | python $fullFileName",
+    "java": "cd $dir && javac $fileName && cat ../input.txt | java $fileNameWithoutExt && cd .."
+    // "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && cat ../input.txt | $dir$fileNameWithoutExt && cd ..",
+  },
+  "files.associations": {
+    "cstdio": "c"
+  }
 }

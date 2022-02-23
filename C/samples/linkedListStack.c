@@ -7,7 +7,7 @@ typedef struct Node
     struct Node *next;
 } ll;
 
-void append(ll **n, int val)
+void add(ll **n, int val)
 {
     ll *new = (ll *)malloc(sizeof(ll));
     new->val = val;
@@ -44,11 +44,11 @@ void print(ll *n)
 int main()
 {
     ll *l = NULL;
-    append(&l, 5);
-    append(&l, 4);
-    append(&l, 3);
-    append(&l, 2);
-    append(&l, 1);
+    add(&l, 5);
+    add(&l, 4);
+    add(&l, 3);
+    add(&l, 2);
+    add(&l, 1);
     pop(&l);
     print(l);
 }
