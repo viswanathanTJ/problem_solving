@@ -1,16 +1,18 @@
-def solve(intervals):
-    res = len(intervals)
-    intervals.sort(key=lambda x: x[0])
-    x, y = intervals[0]
-    for i in range(1, len(intervals)):
-        if x <= intervals[i][0] and intervals[i][1] <= y:
-            res -= 1
+def solve(version1, version2):
+    a = list(map(int, version1.split('.')))
+    b = list(map(int, version2.split('.')))
+    while len(a) > len(b):
+        b.append(0)
+    while len(b) > len(a):
+        a.append(0)
+    for i in range(len(a)):
+        if a[i] == b[i]:
             continue
-        if intervals[i][0] <= x and y <= intervals[i][1]:
-            res -= 1
-        x, y = intervals[i][0], intervals[i][1]
-    return res
+        elif a[i] < b[i]:
+            return -1
+        elif a[i] > b[i]:
+            return 1
+    return 0
 
-intervals = [[1,4],[3,6],[2,8]]
-print(solve(intervals))
-print(solve([[1,4],[2,3]]))
+
+print(solve("1.0.1", "1"))
