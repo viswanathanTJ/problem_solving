@@ -1,6 +1,5 @@
 import java.util.*;
-
-class node {
+    class node {
     int val;
     node next;
 
@@ -9,9 +8,8 @@ class node {
         this.next = null;
     }
 }
+public class MergeSortList {
 
-class Soln {
-    // void mergeSort
     static node push(node head, int val) {
         if (head == null)
             return new node(val);
@@ -61,6 +59,7 @@ class Soln {
             temp.next = right;
         return dummy.next;
     }
+
     static node mergeSort(node head) {
         if (head == null || head.next == null)
             return head;
@@ -82,7 +81,5 @@ class Soln {
         head = mergeSort(head);
         System.out.println();
         print(head);
-        // mergeSort(arr, 0, arr.length - 1);
-        // System.out.println(Arrays.toString(arr));
     }
 }
