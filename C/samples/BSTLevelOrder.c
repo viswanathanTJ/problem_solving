@@ -67,21 +67,8 @@ void postorder(node *root)
     printf("%d ", root->val);
 }
 
-void printCurrentLevel(node *root, int level, int h)
-{
-    if (root == NULL)
-        return;
-    if (level == 1)
-        printf("%d ", root->val);
-    else if (level > 1)
-    {
-        // printf("")
-        printCurrentLevel(root->left, level - 1, h);
-        for (int i = 0; i < h - level; i++)
-            printf("   ");
-        printCurrentLevel(root->right, level - 1, h);
-    }
-}
+// Print Level Order
+
 int height(node *node)
 {
     if (node == NULL)
@@ -93,6 +80,26 @@ int height(node *node)
         return (left > right) ? left + 1 : right + 1;
     }
 }
+void printCurrentLevel(node *root, int level, int h)
+{
+    if (root == NULL)
+        return;
+    if (level == 1)
+        printf("%d ", root->val);
+    else if (level > 1)
+    {
+        int mid = ((h&1) ? h+1 : h) / 2;
+        printCurrentLevel(root->left, level - 1, h);
+        int th = height(root);
+        // printf("h=%d l=%d mid=%d th=%d ", h, level, mid, th);
+        if (mid == level && h == th)
+            printf("   ");
+        for (int i = 0; i < h - level; i++)
+            printf("   ");
+        printCurrentLevel(root->right, level - 1, h);
+    }
+}
+
 void printLevelOrder(node *root)
 {
     int h = height(root);
@@ -112,8 +119,8 @@ int main()
     node *root = NULL;
     add(&root, 100);
     add(&root, 500);
-    // add(&root, 200);
-    // add(&root, 600);
+    add(&root, 200);
+    add(&root, 600);
     add(&root, 20);
     add(&root, 30);
     // add(&root, 25);
