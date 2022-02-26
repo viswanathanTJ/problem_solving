@@ -20,8 +20,9 @@ void add(struct node **root, int val)
     else
     {
         struct node *cur = *root;
-        (cur->val > val) ? add(&cur->left, val) : (cur->val < val) ? add(&cur->right, val)
-                                                                   : printf("%d already present in tree\n", val);
+        (cur->val > val) ? add(&cur->left, val) : 
+            (cur->val < val) ? add(&cur->right, val) :
+                 printf("%d already present in tree\n", val);
     }
 }
 
@@ -32,7 +33,8 @@ int search(struct node *root, int val)
         return 0;
     if (root->val == val)
         return 1;
-    return (val < root->val) ? search(root->left, val) : search(root->right, val);
+    return (val < root->val) ? 
+        search(root->left, val) : search(root->right, val);
 }
 
 // Print BST
