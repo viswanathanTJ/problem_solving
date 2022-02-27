@@ -8,19 +8,15 @@ typedef struct Node
     int val;
 }node;
 
-node *create(int val)
-{
-    node *newnode = (node *)malloc(sizeof(node));
-    newnode->val = val;
-    newnode->left = NULL;
-    newnode->right = NULL;
-    return newnode;
-}
 void add(node **root, int val)
 {
-    node *newnode = create(val);
-    if (*root == NULL)
+    if (*root == NULL){
+        node *newnode = (node *)malloc(sizeof(node));
+        newnode->val = val;
+        newnode->left = NULL;
+        newnode->right = NULL;
         *root = newnode;
+    }
     else
     {
         node *cur = *root;
@@ -90,9 +86,8 @@ void printCurrentLevel(node *root, int level, int h)
     {
         int mid = ((h&1) ? h+1 : h) / 2;
         printCurrentLevel(root->left, level - 1, h);
-        if(h==4 && level==1 && mid==2)
-            printf("  "); 
         int th = height(root);
+        // 2nd level center space
         if (mid == level && h == th)
             printf("   ");
         for (int i = 0; i < h - level; i++)
@@ -104,6 +99,7 @@ void printCurrentLevel(node *root, int level, int h)
 void print(node *root)
 {
     int h = height(root);
+    printf("Height is %d\n", h);
     int i, j;
     for (i = 1; i <= h; i++)
     {
@@ -116,18 +112,60 @@ void print(node *root)
     }
 }
 
+int front = 0, rear = -1;
+int queue[20];
+void bfs_traverse(node *root)
+{
+    int val = root->val;
+    if ((front <= rear) && (root->val == queue[front]))
+    {
+        // printf("f = %d rear = %d\n", front, rear);
+        if (root->left != NULL) {
+
+            queue[++rear] = root->left->val;
+        }
+        if (root->right != NULL) {
+            queue[++rear] = root->right->val;
+            // printf("%d \n", root->right->val);
+        }
+        front++;
+    }
+    if (root->left != NULL)
+        bfs_traverse(root->left);
+    if (root->right != NULL)
+        bfs_traverse(root->right);
+}
+
+void printbfs(node *root) {
+    queue[++rear] = root->val;
+    bfs_traverse(root);
+    for (int i = 0; i < rear;i++)
+        printf("%d -> ", queue[i]);
+    printf("%d\n", queue[rear]);
+}
+
 int main()
 {
     node *root = NULL;
     add(&root, 100);
     add(&root, 500);
     add(&root, 200);
-    add(&root, 600);
+    // add(&root, 600);
     add(&root, 20);
     add(&root, 30);
     // add(&root, 25);
     add(&root, 10);
+    // add(&root, 9);
+    // add(&root, 11);
+    // add(&root, 40);
     print(root);
+    printf("\n");
+    // queue[++rear] = root->val;
+    printbfs(root);
+    // bfs_traverse(root);
+    // for (int i = 0; i <= rear; i++)
+    //     printf("%d -> ", queue[i]);
+    // bfs_traverse(root);
 }
 
 

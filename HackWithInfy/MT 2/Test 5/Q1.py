@@ -1,4 +1,4 @@
-
+# MT 5 Q1
 n = input()
 k = int(input())
 n1 = len(n)

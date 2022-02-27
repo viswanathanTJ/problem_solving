@@ -1,23 +1,29 @@
 #include <stdio.h>
 #include <stdlib.h>
+int main()
+{
+    int input, n;
+    int count = 0;
+    int *numbers = NULL;
 
-void sum(int a, int b) {
-    printf("| %d |\n", a + b);
-}
+    do
+    {
+        printf("Enter an integer value (0 to end): ");
+        scanf("%d", &input);
+        count++;
+        numbers = (int *)realloc(numbers, count * sizeof(int));
+        if (numbers == NULL)
+        {
+            puts("Error (re)allocating memory");
+            exit(1);
+        }
+        numbers[count - 1] = input;
+    } while (input != 0);
 
-void sub(int a, int b) {
-    printf("| %d |\n", a - b);
-}
+    printf("Numbers entered: ");
+    for (n = 0; n < count; n++)
+        printf("%d ", numbers[n]);
+    free(numbers);
 
-void fun(void(*p)(int, int)) {
-    printf("------\n");
-    int a = 2, b = 3;
-    p(4, 10);
-    printf("------\n");
-}   
-
-int main() {
-    // fun(sum, 15, 20);
-    fun(sum);
-    fun(sub);
+    return 0;
 }
