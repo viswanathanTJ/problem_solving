@@ -1,5 +1,6 @@
 from functools import cmp_to_key
 
+
 @cmp_to_key
 def custom_compare(a, b):
     value1 = str(a) + str(b)
@@ -11,9 +12,11 @@ def custom_compare(a, b):
     else:
         return 0
 
+
 def findLargestNumber(numbers):
     numbers.sort(key=custom_compare)
     return ''.join(map(str, numbers))
+
 
 n = int(input())
 numbers = list(map(int, input().split()))

@@ -35,64 +35,59 @@ int search(node *root, int val) {
         search(root->right, val);
 }
 
-void inorder(node *root) {
-    if(root == NULL)
-        return;
-    inorder(root->left);
-    printf("%d ", root->val);
-    inorder(root->right);
-}
-
-void preorder(node *root) {
-    if(root==NULL)
-        return;
-    printf("%d ", root->val);
-    preorder(root->left);
-    preorder(root->right);
-}
-
-void postorder(node *root) {
-    if(root==NULL)
-        return;
-    postorder(root->left);
-    postorder(root->right);
-    printf("%d ", root->val);
-}
-
-int height(node *root) {
-    if(root==NULL)
+int height(node *root)
+{
+    if (root == NULL)
         return 0;
     int left = height(root->left);
     int right = height(root->right);
     return (left > right) ? left + 1 : right + 1;
 }
 
-void printCurrentLevel(node *root, int level) {
-    if(root==NULL) {
-        printf("   ");
-        return;
+int _print(node *root, int is_left, int offset, int depth, char s[20][255])
+{
+    char b[20];
+    int width = 5;
+
+    if (!root)
+        return 0;
+
+    sprintf(b, "(%03d)", root->val);
+
+    int left = _print(root->left, 1, offset, depth + 1, s);
+    int right = _print(root->right, 0, offset + left + width, depth + 1, s);
+
+    for (int i = 0; i < width; i++)
+        s[depth][offset + left + i] = b[i];
+
+    if (depth && is_left)
+    {
+        for (int i = 0; i < width + right; i++)
+            s[depth - 1][offset + left + width / 2 + i] = '-';
+
+        s[depth - 1][offset + left + width / 2] = '.';
     }
-    if(level==1)
-        printf("%d ", root->val);
-    else if(level > 1) {
-        printCurrentLevel(root->left, level - 1);
-        int th = height(root);
-        // printf("th=%d lev=%d\n", th, level);
-        for (int i = 0; i < th-level;i++)
-            printf(" ");
-        printf("   ");
-        printCurrentLevel(root->right, level - 1);
+    else if (depth && !is_left)
+    {
+        for (int i = 0; i < left + width; i++)
+            s[depth - 1][offset - width / 2 + i] = '-';
+
+        s[depth - 1][offset + left + width / 2] = '.';
     }
+
+    return left + width + right;
 }
 
-void printBST(node *root) {
-    int h = height(root);
-    for (int i = 1; i <= h;i++) {
-        for (int j = 0; j < h - i;j++)
-            printf("   ");
-        printCurrentLevel(root, i);
-        printf("\n");
-    }
+void print(node *tree)
+{
+    char s[20][255];
+    for (int i = 0; i < 20; i++)
+        sprintf(s[i], "%80s", " ");
+
+    _print(tree, 0, 0, 0, s);
+    int h = height(tree);
+    for (int i = 0; i < h; i++)
+        printf("%s\n", s[i]);
 }
 
 int main() {
@@ -100,9 +95,13 @@ int main() {
     add(&root, 80);
     add(&root, 70);
     add(&root, 90);
-    add(&root, 60);
-    add(&root, 75);
-    add(&root, 50);
-    add(&root, 65);
-    printBST(root);
+    add(&root, 100);
+    // add(&root, 120);
+    // add(&root, 85);
+    // add(&root, 95);
+    // add(&root, 60);
+    // add(&root, 75);
+    // add(&root, 50);
+    // add(&root, 65);
+    print(root);
 }

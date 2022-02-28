@@ -1,3 +1,4 @@
+# MT 1 Q1
 def maxdiff(l):
     i = 0
     j = len(l)-1

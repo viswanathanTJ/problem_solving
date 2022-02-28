@@ -1,48 +1,52 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 class Main {
-    public static void merge(int[] arr, int l, int m, int r) {
-        int i, j, k;
-        int n1 = m - l + 1;
-        int n2 = r - m;
-        int[] L = new int[n1];
-        int[] R = new int[n2];
-        for (i = 0; i < n1; i++)
-            L[i] = arr[l + i];
-        for (j = 0; j < n2; j++)
-            R[j] = arr[m + 1 + j];
-        i = j = 0;
-        k = l;
-        while (i < n1 && j < n2) {
-            if (L[i] <= R[j])
-                arr[k++] = L[i++];
-            else
-                arr[k++] = R[j++];
+    public static int dfs(int[][] mat) {
+        int r = mat.length;
+        int c = mat[0].length;
+        boolean[][] visit = new boolean[r][c];
+        for (int i = 0; i < r; i++)
+            Arrays.fill(visit[i], false);
+        int count = 0;
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < c; j++) {
+                if (!visit[i][j] && mat[i][j] == 1) {
+                    dfs(i, j, mat, visit);
+                    count++;
+                }
+            }
         }
-        while (i < n1)
-            arr[k++] = L[i++];
-        while (j < n2)
-            arr[k++] = R[j++];
+        return count;
     }
 
-    public static void mergeSort(int[] arr, int l, int r) {
-        if (l < r) {
-            int m = (l + r) / 2;
-            mergeSort(arr, l, m);
-            mergeSort(arr, m + 1, r);
-            merge(arr, l, m, r);
-        }
+    public static void dfs(int i, int j, int[][] mat, boolean[][] visit) {
+        if (i < 0 || j < 0 || i >= mat.length || j >= mat[0].length || visit[i][j] || mat[i][j] == 0)
+            return;
+        visit[i][j] = true;
+        dfs(i + 1, j, mat, visit);
+        dfs(i - 1, j, mat, visit);
+        dfs(i, j + 1, mat, visit);
+        dfs(i, j - 1, mat, visit);
+
+        dfs(i + 1, j + 1, mat, visit);
+        dfs(i - 1, j - 1, mat, visit);
+        dfs(i + 1, j - 1, mat, visit);
+        dfs(i - 1, j + 1, mat, visit);
     }
 
+
+    
     public static void main(String[] args) {
-        Random rn = new Random();
-        int n = 7;
-        int[] arr = new int[n];
-        while (n-- > 0)
-            arr[n] = rn.nextInt(100);
-        System.out.println(Arrays.toString(arr));
-        mergeSort(arr, 0, arr.length-1);
-        System.out.println(Arrays.toString(arr));
+        Scanner sn = new Scanner(System.in);
+        int r = sn.nextInt();
+        int c = sn.nextInt();
+        int[][] mat = new int[r][c];
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < c; j++) {
+                mat[i][j] = sn.nextInt();
+            }
+        }
+        System.out.println(dfs(mat));
     }
 }

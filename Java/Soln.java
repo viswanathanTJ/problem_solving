@@ -1,88 +1,48 @@
 import java.util.*;
 
-class node {
-    int val;
-    node next;
-
-    node(int val) {
-        this.val = val;
-        this.next = null;
-    }
-}
 
 class Soln {
-    // void mergeSort
-    static node push(node head, int val) {
-        if (head == null)
-            return new node(val);
-        else {
-            node n = new node(val);
-            n.next = head;
-            return n;
+    public int countLuck(String s) {
+        char[] a = s.toCharArray();
+        int luck = 0;
+        int count = 0;
+        for (int i = 0; i < a.length; ++i) {
+            if (a[i] == ' ') {
+                if (count >= 4)
+                    ++luck;
+                count = 0;
+            } else if (((int) (a[i] - 'a')) % 2 == 0)
+                ++count;
         }
+        return luck;
     }
 
-    static void print(node head) {
-        node cur = head;
-        while (cur != null) {
-            System.out.print(cur.val + " ");
-            cur = cur.next;
+    public void luckiest(String[] a) {
+        int[] c = new int[a.length];
+        int max1 = -1;
+        for (int i = 0; i < a.length; ++i) {
+            c[i] = countLuck(a[i]);
+            if (max1 < 0)
+                max1 = i;
+            else if (c[i] > c[max1])
+                max1 = i;
         }
-    }
-
-    static node get_mid(node head) {
-        node slow = head;
-        node fast = head;
-        node prev = null;
-        while (fast != null && fast.next != null) {
-            prev = slow;
-            slow = slow.next;
-            fast = fast.next.next;
+        System.out.println(a[max1]);
+        int max2 = -1;
+        for (int i = 0; i < a.length; ++i) {
+            if (i == max1)
+                continue;
+            if (max2 < 0)
+                max2 = i;
+            else if (c[i] > c[max2])
+                max2 = i;
         }
-        return prev;
-    }
-
-    static node merge(node left, node right) {
-        node dummy = new node(-1);
-        node temp = dummy;
-        while (left != null && right != null) {
-            if (left.val < right.val) {
-                temp.next = left;
-                left = left.next;
-            } else {
-                temp.next = right;
-                right = right.next;
-            }
-            temp = temp.next;
-        }
-        if (left != null)
-            temp.next = left;
-        if (right != null)
-            temp.next = right;
-        return dummy.next;
-    }
-    static node mergeSort(node head) {
-        if (head == null || head.next == null)
-            return head;
-        node left = head;
-        node mid = get_mid(head);
-        node right = mid.next;
-        mid.next = null;
-        left = mergeSort(left);
-        right = mergeSort(right);
-        return merge(left, right);
+        System.out.println(a[max2]);
     }
 
     public static void main(String[] args) {
-        node head = new node(5);
-        Random rn = new Random();
-        for (int i = 0; i < 5; i++)
-            head = push(head, rn.nextInt(50));
-        print(head);
-        head = mergeSort(head);
-        System.out.println();
-        print(head);
-        // mergeSort(arr, 0, arr.length - 1);
-        // System.out.println(Arrays.toString(arr));
+        Soln obj = new Soln();
+        String[] arr = { "KRKRKKR" };
+        obj.luckiest(arr);
     }
 }
