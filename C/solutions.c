@@ -2,28 +2,16 @@
 #include <stdlib.h>
 int main()
 {
-    int input, n;
-    int count = 0;
-    int *numbers = NULL;
-
-    do
-    {
-        printf("Enter an integer value (0 to end): ");
-        scanf("%d", &input);
-        count++;
-        numbers = (int *)realloc(numbers, count * sizeof(int));
-        if (numbers == NULL)
-        {
-            puts("Error (re)allocating memory");
-            exit(1);
-        }
-        numbers[count - 1] = input;
-    } while (input != 0);
-
-    printf("Numbers entered: ");
-    for (n = 0; n < count; n++)
-        printf("%d ", numbers[n]);
-    free(numbers);
+    int *arr, *crr;
+    arr = malloc(2 * sizeof(int));
+    crr = calloc(2, sizeof(int));
+    printf("arr[0]= %d\narr[1]=%d\n", *(arr), *(arr + 1));
+    printf("arr[0]= %d\narr[1]=%d\n", *(crr), *(crr + 1));
+    int a = 5;
+    printf("arr[2]=%d\n", *(arr + 2));
+    printf("crr[2]=%d\n", *(crr + 2));
+    printf("After realloc\n");
+    // arr = 
 
     return 0;
 }

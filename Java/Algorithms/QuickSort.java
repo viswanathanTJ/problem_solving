@@ -18,7 +18,7 @@ class QuickSort{
 				ar[pind] = t;
 				pind++;
 			}
-		}
+		} 
 		int t = ar[e];
 		ar[e] = ar[pind];
 		ar[pind] = t;

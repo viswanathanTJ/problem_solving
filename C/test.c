@@ -94,14 +94,14 @@ int main() {
     node *root = NULL;
     add(&root, 80);
     add(&root, 70);
-    add(&root, 90);
+    // add(&root, 90);
     add(&root, 100);
-    // add(&root, 120);
-    // add(&root, 85);
-    // add(&root, 95);
+    add(&root, 120);
+    add(&root, 85);
+    add(&root, 95);
     // add(&root, 60);
-    // add(&root, 75);
-    // add(&root, 50);
-    // add(&root, 65);
+    add(&root, 75);
+    add(&root, 50);
+    add(&root, 65);
     print(root);
 }
