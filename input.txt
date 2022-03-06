@@ -1,0 +1,15 @@
+#include<bits/std++.h>
+int main() {
+cout<<"Plain Egg-1.45\n";
+cout<<"Bacon and Egg-2.45\n";
+cout<<"Muffin-0.45\n";
+cout<<"French Toast-1.99\n";
+cout<<"Fruit Basket-2.49\n";
+cout<<"Cereal-0.69\n";
+cout<<"Coffee-0.50\n";
+cout<<"Tea-0.75\n";
+int n, q;
+cin>>n>>q;
+float menu[] = {0, 1.45, 2.45, 0.45, 1.99, 2.49, 0.69, 0.50, 0.75};
+float r = menu[n] * q;
+cout<<r + ((5 / 100.0) * r);
