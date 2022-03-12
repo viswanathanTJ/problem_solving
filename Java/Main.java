@@ -1,52 +1,50 @@
 import java.io.*;
-import java.util.*;
+import java.util.Arrays;
 
 class Main {
-    public static int dfs(int[][] mat) {
-        int r = mat.length;
-        int c = mat[0].length;
-        boolean[][] visit = new boolean[r][c];
-        for (int i = 0; i < r; i++)
-            Arrays.fill(visit[i], false);
-        int count = 0;
-        for (int i = 0; i < r; i++) {
-            for (int j = 0; j < c; j++) {
-                if (!visit[i][j] && mat[i][j] == 1) {
-                    dfs(i, j, mat, visit);
-                    count++;
-                }
+    public static void main(String[] args) throws Exception {
+        code object = new code();
+        BufferedReader buf = new BufferedReader(new InputStreamReader(System.in));
+        String[] str1 = buf.readLine().split(" ");
+        int P = Integer.parseInt(str1[0]);
+        int Q = Integer.parseInt(str1[1]);
+        int N = Integer.parseInt(str1[2]);
+
+        int[] aliens = new int[N];
+        int[] golds = new int[N];
+        for (int i = 0; i < N; i++) {
+            String[] temp = buf.readLine().split(" ");
+            aliens[i] = Integer.parseInt(temp[0]);
+            golds[i] = Integer.parseInt(temp[1]);
+        }
+
+        object.Gold(P, Q, N, aliens, golds);
+    }
+}
+
+class code {
+    void Gold(int P, int Q, int n, int[] alien, int[] gold) {
+        if (n == 2) {
+            if ((alien[0] < P && alien[1] < P && alien[0] < Q && alien[1] < Q)
+                    || (alien[0] > P && alien[1] < 2 * P && alien[0] < Q && alien[1] < Q)) {
+                System.out.println(Math.max(gold[0], gold[1]));
+            } else {
+                System.out.println(0);
+            }
+        } else {
+            int val = P / Q;
+            if (val % 2 != 0 || val == 0) {
+                Arrays.sort(gold);
+                int s = 0;
+                for (int i = 0; i < n; i++)
+                    s += gold[i];
+                System.out.println(s - gold[0]);
+            } else {
+                int s = 0;
+                for (int i = 0; i < n; i++)
+                    s += gold[i];
+                System.out.println(s);
             }
         }
-        return count;
-    }
-
-    public static void dfs(int i, int j, int[][] mat, boolean[][] visit) {
-        if (i < 0 || j < 0 || i >= mat.length || j >= mat[0].length || visit[i][j] || mat[i][j] == 0)
-            return;
-        visit[i][j] = true;
-        dfs(i + 1, j, mat, visit);
-        dfs(i - 1, j, mat, visit);
-        dfs(i, j + 1, mat, visit);
-        dfs(i, j - 1, mat, visit);
-
-        dfs(i + 1, j + 1, mat, visit);
-        dfs(i - 1, j - 1, mat, visit);
-        dfs(i + 1, j - 1, mat, visit);
-        dfs(i - 1, j + 1, mat, visit);
-    }
-
-
-    
-    public static void main(String[] args) {
-        Scanner sn = new Scanner(System.in);
-        int r = sn.nextInt();
-        int c = sn.nextInt();
-        int[][] mat = new int[r][c];
-        for (int i = 0; i < r; i++) {
-            for (int j = 0; j < c; j++) {
-                mat[i][j] = sn.nextInt();
-            }
-        }
-        System.out.println(dfs(mat));
     }
 }
