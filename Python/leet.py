@@ -1,3 +1,4 @@
+
 def solve(arr, n, k):
 	x = n // k
 	freq = {}
