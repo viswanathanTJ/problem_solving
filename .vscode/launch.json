@@ -5,6 +5,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "java",
+      "name": "Launch QuickSort",
+      "request": "launch",
+      "mainClass": "QuickSort",
+      "projectName": "problem_solving_2c29d89"
+    },
+    {
       "name": "g++.exe build and debug active file",
       "type": "cppdbg",
       "request": "launch",
@@ -13,7 +20,7 @@
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
       "environment": [],
-      "externalConsole": false, //set to true to see output in cmd instead
+      "externalConsole": false,
       "MIMode": "gdb",
       "miDebuggerPath": "C:\\Apps\\MinGW64\\bin\\gdb.exe",
       "setupCommands": [
@@ -34,7 +41,7 @@
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
       "environment": [],
-      "externalConsole": false, //set to true to see output in cmd instead
+      "externalConsole": false,
       "MIMode": "gdb",
       "miDebuggerPath": "C:\\Apps\\MinGW64\\bin\\gdb.exe",
       "setupCommands": [

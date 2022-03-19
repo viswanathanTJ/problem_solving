@@ -27,11 +27,12 @@ class QuickSort{
 	public static final Scanner sn = new Scanner(System.in);
 	public static final Random rn = new Random();
 	public static void main(String[] args) {
-		System.out.println("Enter array size : ");
-		int n = Int();
-		int[] arr = new int[n];
-		System.out.println("Enter Array Elements : ");
-		for(int i=0; i<n; i++) arr[i] = Int();
+		// System.out.println("Enter array size : ");
+		// int n = Int();
+		// int[] arr = new int[n];
+		// System.out.println("Enter Array Elements : ");
+		// for(int i=0; i<n; i++) arr[i] = Int();
+		int arr[] = {9,2,3,1,8,5,7};
 		sort(arr, 0, arr.length-1);
 		System.out.println("Sorted Array : ");
 		for(int x : arr) System.out.print(x+" ");
