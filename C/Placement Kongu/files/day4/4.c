@@ -19,6 +19,24 @@ int main()
 // You are using GCC
 void count_temp(FILE *fp)
 {
+    int n, hd = 0, cd = 0, pd = 0;
+    float tot = 0;
+    fp = fopen("input.txt", "r");
+    while ((fscanf(fp, "%d", &n)) == 1)
+    {
+        if (n > 84)
+            hd++;
+        else if (n > 59 && n < 85)
+            pd++;
+        else if (n < 60)
+            cd++;
+        tot += n;
+    }
+    printf("Hot Days : %d\n", hd);
+    printf("Pleasant Days : %d\n", pd);
+    printf("Cold Days : %d\n", cd);
+    printf("Average Temperature : %.2f", tot / (hd + pd + cd));
+    fclose(fp);
     // Type your code here
 }
 

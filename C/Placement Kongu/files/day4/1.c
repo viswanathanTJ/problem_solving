@@ -1,34 +1,20 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 int main()
 {
-    char s[50], in[500], cmp[50];
-    gets(in);
-    scanf("%s", cmp);
-    int c = 0, index = 1, len;
-    for (len = 0; cmp[len] != '\0'; len++)
-        ;
-    char ch, pc = cmp[0];
-    FILE *f = fopen("input.txt", "w+");
-    fputs(in, f);
-    fseek(f, 0, SEEK_SET);
-    while ((ch = fgetc(f)) != EOF)
+    int n, i, j;
+    char c;
+    scanf("%d", &n);
+    FILE *fp = fopen("input.txt", "w+");
+    for (j = 2, i = 0; i < n - 1; i++, j++)
     {
-        if (ch == cmp[index] && pc == cmp[index - 1])
-        {
-            index++;
-            pc = ch;
-            if (index == len)
-                c++;
-        }
-        else
-        {
-            pc = cmp[0];
-            index = 1;
-        }
+        fprintf(fp, "%d %d %d\n", j, j * j, j * j * j);
     }
-    printf("%s - %d", cmp, c);
-    fclose(f);
+    fclose(fp);
+
+    fp = fopen("input.txt", "r");
+    while ((c = getc(fp)) != EOF)
+        printf("%c", c);
+    fclose(fp);
+    return 0;
 }

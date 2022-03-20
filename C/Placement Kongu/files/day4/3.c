@@ -10,8 +10,17 @@ int main()
     fclose(fs1);
     fclose(fs2);
 
+    fout = fopen("output.txt", "w");
+    fs1 = fopen("input1.txt", "r");
+    fs2 = fopen("input2.txt", "r");
     char ch;
-    ///
+    while ((ch = fgetc(fs1)) != EOF)
+        fputc(ch, fout);
+    while ((ch = fgetc(fs2)) != EOF)
+        fputc(ch, fout);
+    fclose(fout);
+    fclose(fs1);
+    fclose(fs2);
 
     fout = fopen("output.txt", "r");
     while ((ch = getc(fout)) != EOF)
