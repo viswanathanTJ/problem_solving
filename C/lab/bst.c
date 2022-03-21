@@ -1,86 +1,68 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdlib.h>
 
-typedef struct Node
+typedef struct bst
 {
-    struct Node *left;
-    struct Node *right;
+    struct bst *left;
+    struct bst *right;
     int val;
-} node;
+}node;
 
-void add(node **root, int val)
-{
-    node *newnode = (node *)malloc(sizeof(node));
-    newnode->val = val;
-    newnode->left = NULL;
-    newnode->right = NULL;
-    if (*root == NULL)
-        *root = newnode;
-    else
-    {
+void add(node **root, int val) {
+    node *new = (node *)malloc(sizeof(node));
+    new->val = val;
+    new->left = NULL;
+    new->right = NULL;
+    if(*root == NULL)
+        *root = new;
+    else {
         node *cur = *root;
-        if(cur->val > val)
-            add(&cur->left, val);
-        else if(cur->val < val)
-            add(&cur->right, val);
-        else
-            printf("%d already present in tree\n", val);
+        (cur->val < val) ? add(&cur->right, val) : add(&cur->left, val);
     }
 }
 
-int search(node *root, int val)
-{
-    if (root == NULL)
+int search(node *root, int n) {
+    if(root == NULL)
         return 0;
-    if (root->val == val)
+    if(root->val == n)
         return 1;
-    return (val < root->val) ? search(root->left, val) : search(root->right, val);
+    return (root->val < n) ? search(root->right, n) : search(root->left, n);
 }
 
-void preorder(node *root)
-{
-    if (root == NULL)
+void preorder(node *root) {
+    if(root == NULL)
         return;
     printf("%d ", root->val);
     preorder(root->left);
     preorder(root->right);
 }
-
-void inorder(node *root)
-{
-    if (root == NULL)
+void postorder(node *root) {
+    if(root == NULL)
+        return;
+    postorder(root->left);
+    postorder(root->right);
+    printf("%d ", root->val);
+}
+void inorder(node *root) {
+    if(root == NULL)
         return;
     inorder(root->left);
     printf("%d ", root->val);
     inorder(root->right);
 }
 
-void postorder(node *root)
-{
-    if (root == NULL)
-        return;
-    postorder(root->left);
-    postorder(root->right);
-    printf("%d ", root->val);
-}
-
-
-int main()
-{
-    node *root = NULL;
-    add(&root, 100);
-    add(&root, 500);
-    add(&root, 200);
-    add(&root, 600);
-    add(&root, 20);
-    add(&root, 30);
-    // add(&root, 25);
-    add(&root, 10);
-    preorder(root);
+int main() {
+    node *bst = NULL;
+    add(&bst, 5);
+    add(&bst, 10);
+    add(&bst, 4);
+    add(&bst, 15);
+    add(&bst, 3);
+    int n = 5;
+    printf("%s\n", search(bst, n) ? "[+] Found" : "[-] Not found");
+    preorder(bst);
     printf("\n");
-    postorder(root);
+    postorder(bst);
     printf("\n");
-    inorder(root);
-    printf("\n");
-    printf("%s", search(root, 10) ? "[*] Found\n" : "[-] Not found\n");
+    inorder(bst);
 }

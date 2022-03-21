@@ -9,6 +9,7 @@ int bs(int a[], int low, int high, int x)
         return mid;
     return (a[mid] < x) ? bs(a, mid + 1, high, x) : bs(a, low, mid, x);
 }
+
 int main()
 {
     int n, i, x;

@@ -9,7 +9,7 @@ void bfs(int v)
     for (int i = 0; i < n; i++)
         if (adj[v][i] && !visited[i])
             q[++r] = i;
-    if (f < r)
+    if (f <= r)
     {
         visited[q[f]] = 1;
         printf("%d ", v);

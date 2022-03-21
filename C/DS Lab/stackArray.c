@@ -18,10 +18,7 @@ void pop()
     if (top == -1)
         printf("\nArray is empty");
     else
-    {
-        --top;
-        printf("\nPopped element %d", arr[top + 1]);
-    }
+        printf("\nPopped element %d", arr[top--]);
 }
 
 void peek()

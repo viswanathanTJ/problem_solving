@@ -1,74 +1,44 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#define MAX 20
 
-#define MAX 100
-int arr[MAX];
-int top = -1;
+int stack[MAX], top = -1;
 
-void push(int n)
-{
-    if (top == MAX - 1)
-        printf("\nStack is full");
-    else
-        arr[++top] = n;
-}
-
-void pop()
-{
-    if (top == -1)
-        printf("\nArray is empty");
-    else
-    {
-        --top;
-        printf("\nPopped element %d", arr[top + 1]);
+void push(int n) {
+    if(top==MAX-1)
+        printf("Overflow\n");
+    else {
+        stack[++top] = n;
+        printf("Inserted\n");
     }
 }
-
-void peek()
-{
-    if (top == -1)
-        printf("\nStack is empty");
-    else
-        printf("\nPeek element is %d", arr[top]);
-}
-
-void display()
-{
-    if (top == -1)
-        printf("\nStack is empty");
-    else
-    {
-        for (int i = top; i >= 0; i--)
-            printf("%d ", arr[i]);
+void pop() {
+    if(top==-1)
+        printf("Underflow\n");
+    else {
+        printf("Popped element is %d\n", stack[top--]);
     }
 }
-
-int main()
-{
-    while (1)
-    {
-        printf("\n1.Push\n2.Pop\n3.Peek\n4.Display\n5.Exit\n");
-        int ch, num;
-        scanf("%d", &ch);
-        switch (ch)
-        {
-        case 1:
-            printf("\nEnter element:");
-            scanf("%d", &num);
-            push(num);
-            break;
-        case 2:
-            pop();
-            break;
-        case 3:
-            peek();
-            break;
-        case 4:
-            display();
-            break;
-        case 5:
-            exit(0);
-        }
+void peek() {
+    if(top==-1)
+        printf("Stack is empty\n");
+    else
+        printf("%d\n", stack[top]);
+}
+void show() {
+    if(top==-1)
+        printf("Stack is empty\n");
+    else {
+        for (int i = top; i >= 0;i--)
+            printf("%d ", stack[i]);
     }
-    return 0;
+}
+int main() {
+    push(5);
+    push(10);
+    push(15);
+    push(20);
+    push(25);
+    peek();
+    pop();
+    show();
 }

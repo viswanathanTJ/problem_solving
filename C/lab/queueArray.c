@@ -1,72 +1,45 @@
-#include <stdio.h>
-#include <stdlib.h>
-#define SIZE 10
-int arr[SIZE];
-int front = -1;
-int rear = -1;
-void enque();
-void deque();
-void show();
+#include<stdio.h>
+#define MAX 20
 
-int main()
-{
-    int ch;
-    while (1)
-    {
-        printf("\n1.Enque\n2.Deque\n3.Show\n4.Exit\n");
-        scanf("%d", &ch);
-        switch (ch)
-        {
-        case 1:
-            enque();
-            break;
-        case 2:
-            deque();
-            break;
-        case 3:
-            show();
-            break;
-        case 4:
-            exit(0);
-        }
+int q[MAX], f = -1, r = -1;
+
+void enque(int n) {
+    if(r == MAX-1)
+        printf("Overflow\n");
+    else {
+        if(f==-1)
+            f = 0;
+        q[++r] = n;
+        printf("Inserted\n");
     }
-    return 0;
 }
-
-void enque()
-{
-    if (rear == SIZE - 1)
-        printf("\nOverflow\n");
+void deque() {
+    if(f == -1)
+        printf("Underflow\n");
     else
-    {
-        int num;
-        if (front == -1)
-            front = 0;
-        printf("\nEnter number to push: ");
-        scanf("%d", &num);
-        rear += 1;
-        arr[rear] = num;
+        printf("dequed %d\n", q[f++]);
+}
+void peek() {
+    if(f==-1)
+        printf("Queue empty\n");
+    else
+        printf("%d\n", q[f]);
+}
+void display() {
+    if(f==-1)
+        printf("Queue empty\n");
+    else {
+        for (int i = f; i <= r;i++)
+            printf("%d ", q[i]);
     }
 }
 
-void deque()
-{
-    if (front == -1 || front > rear)
-        printf("\nUnderflow\n");
-    else
-    {
-        printf("\nDequed %d", arr[front]);
-        front += 1;
-    }
-}
-
-void show()
-{
-    if (front == -1)
-        printf("\nEmpty Queue\n");
-    else
-    {
-        for (int i = front; i <= rear; i++)
-            printf("%d ", arr[i]);
-    }
+int main() {
+    enque(5);
+    enque(10);
+    enque(15);
+    enque(20);
+    enque(25);
+    deque();
+    display();
 }

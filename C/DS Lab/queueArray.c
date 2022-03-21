@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #define SIZE 10
 int arr[SIZE];
-int front = -1;
-int rear = -1;
+int front = -1, rear = -1;
 void enque();
 void deque();
+void peek();
 void show();
 
 int main()
@@ -13,7 +13,7 @@ int main()
     int ch;
     while (1)
     {
-        printf("\n1.Enque\n2.Deque\n3.Show\n4.Exit\n");
+        printf("\n1.Enque\n2.Deque\n3.Peek\n4.Show\n5.Exit\n");
         scanf("%d", &ch);
         switch (ch)
         {
@@ -24,9 +24,12 @@ int main()
             deque();
             break;
         case 3:
-            show();
+            peek();
             break;
         case 4:
+            show();
+            break;
+        case 5:
             exit(0);
         }
     }
@@ -44,8 +47,7 @@ void enque()
             front = 0;
         printf("\nEnter number to push: ");
         scanf("%d", &num);
-        rear += 1;
-        arr[rear] = num;
+        arr[++rear] = num;
     }
 }
 
@@ -54,12 +56,15 @@ void deque()
     if (front == -1 || front > rear)
         printf("\nUnderflow\n");
     else
-    {
-        printf("\nDequed %d", arr[front]);
-        front += 1;
-    }
+        printf("\nDequed %d", arr[front++]);
 }
 
+void peek() {
+    if(front == -1)
+        printf("\nQueue is empty\n");
+    else
+        printf("Peek element is: %d\n", arr[front]);
+}
 void show()
 {
     if (front == -1)

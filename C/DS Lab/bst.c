@@ -19,12 +19,7 @@ void add(node **root, int val)
     else
     {
         node *cur = *root;
-        if(cur->val > val)
-            add(&cur->left, val);
-        else if(cur->val < val)
-            add(&cur->right, val);
-        else
-            printf("%d already present in tree\n", val);
+        (cur->val > val) ? add(&cur->left, val) : add(&cur->right, val);
     }
 }
 
@@ -64,17 +59,60 @@ void postorder(node *root)
     printf("%d ", root->val);
 }
 
+// int main()
+// {
+//     node *root = NULL;
+//     int num;
+//     int ch;
+//     while (1)
+//     {
+//         printf("\n1.Insert\n2.Search\n3.Preorder\n4.Postorder\n5.Inorder\n0.Exit\nEnter choice : ");
+//         scanf("%d", &ch);
+//         switch (ch)
+//         {
+//             case 1:
+//                 printf("\nEnter element: ");
+//                 scanf("%d", &num);
+//                 add(&root, num);
+//                 printf("\n[+] Inserted\n");
+//                 break;
+//             case 2:
+//                 printf("\nEnter element: ");
+//                 scanf("%d", &num);
+//                 printf("%s\n", search(root, num) ? "[*] Found" : "[-] Not found");
+//                 break;
+//             case 3:
+//                 preorder(root);
+//                 printf("\n");
+//                 break;
+//             case 4:
+//                 postorder(root);
+//                 printf("\n");
+//                 break;
+//             case 5:
+//                 inorder(root);
+//                 printf("\n");
+//                 break;
+//             case 0:
+//                 exit(0);
+//             default:
+//                 printf("\nInvalid Input\n");
+//                 break;
+//             }
+//     }
+//     return 0;
+// }
 
 int main()
 {
     node *root = NULL;
-    add(&root, 100);
-    add(&root, 500);
+    // add(&root, 100);
+    // add(&root, 500);
     add(&root, 200);
-    add(&root, 600);
+    // add(&root, 600);
     add(&root, 20);
     add(&root, 30);
-    // add(&root, 25);
+    add(&root, 25);
     add(&root, 10);
     preorder(root);
     printf("\n");

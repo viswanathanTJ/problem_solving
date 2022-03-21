@@ -17,7 +17,6 @@ void create(int coeff, int pow, poly **p) {
         poly *cur = *p;
         while(cur->next) 
             cur = cur->next;
-        cur->next = (poly *)malloc(sizeof(poly));
         cur->next = new;
     }
 }

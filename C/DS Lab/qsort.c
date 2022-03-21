@@ -9,12 +9,11 @@ void swap(int *a, int*b) {
 int partition(int ar[], int start, int end) {
     int pivot = ar[end];
     int pind = start;
-    for (int i = start; i < end;i++) {
-        if(ar[i] <= pivot) {
-            swap(&ar[i], &ar[pind]);
-            pind++;
-        }
-    }
+    
+    for (int i = start; i < end;i++)
+        if(ar[i] <= pivot) 
+            swap(&ar[i], &ar[pind++]);
+
     swap(&ar[end], &ar[pind]);
     return pind;
 }
