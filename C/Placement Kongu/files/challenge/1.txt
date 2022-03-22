@@ -1,0 +1,3 @@
+target = fopen("source_file.txt", "r");
+while ((ch = fgetc(target)) != EOF)
+    fputc(ch, stdout);

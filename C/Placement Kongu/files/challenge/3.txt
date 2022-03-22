@@ -1,0 +1,7 @@
+char c, d;
+FILE *fptr1, *fptr2;
+fptr1 = fopen("input1.txt", "r");
+fptr2 = fopen("input2.txt", "r");
+while ((c = fgetc(fptr1)) != (d = fgetc(fptr2)) && c != EOF)
+    printf("File contents are not same");
+printf("File contents are same");
