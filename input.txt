@@ -1,17 +1,19 @@
-n = int(input())
-b = [0]*32
-ans = [0]*32
-i = 0
-while n > 0:
-    b[i] = n % 2
-    i += 1
-    n = n//2
-    
-ans[0] = b[0] ^ 1
-for j in range(1, i):
-    ans[j] = b[j] ^ b[j-1]
-mul, out = 1, 0
-for e in ans:
-    out = out + e*mul
-    mul *= 2
-print(out)
+#include <stdio.h>
+
+int main()
+{
+int a[50], i, n, large, small;
+scanf("%d", &n);
+for (i = 0; i < n; ++i)
+scanf("%d", &a[i]);
+large = small = a[0];
+for (i = 1; i < n; ++i)
+{
+if (a[i] > large)
+large = a[i];
+if (a[i] < small)
+small = a[i];
+}
+printf(large+small);
+return 0;
+}

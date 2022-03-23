@@ -1,0 +1,8 @@
+int pcm = p + c + m;
+int pm = p + m;
+printf("Total marks of Maths, Physics, and Chemistry : %d", pcm);
+printf("\nTotal marks of Maths and Physics : %d", pm);
+if (m >= 65 && p >= 55 && c >= 50 && pcm >= 190 || pm >= 140)
+    printf("\nThe candidate is eligible for admission.");
+else
+    printf("\nThe candidate is not eligible.");

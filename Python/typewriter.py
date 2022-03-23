@@ -7,3 +7,5 @@ with open('input.txt', 'r') as f:
 p.hotkey('alt','tab')
 sleep(.5)
 p.typewrite(w)
+for i in range(10):
+    p.hotkey('ctrl', 'delete')
