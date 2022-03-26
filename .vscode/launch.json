@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Launch NQueensRowWise",
+      "request": "launch",
+      "mainClass": "NQueensRowWise",
+      "projectName": "problem_solving_2c29d89"
+    },
+    {
+      "type": "java",
       "name": "Launch QuickSort",
       "request": "launch",
       "mainClass": "QuickSort",

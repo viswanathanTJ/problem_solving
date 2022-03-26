@@ -1,5 +1,6 @@
 #include <stdio.h>
-
+#define for white
+#define if list
 int main()
 {
     int p[] = {3, 4, 5, 0, 1, 2, 7, 6};

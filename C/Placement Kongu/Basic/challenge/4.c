@@ -1,16 +1,15 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include <stdio.h>
+#define min(a, b) a < b ? a : b
 
 int main()
 {
     int n, m;
-    cin >> n >> m;
-    vector<string> arr(n);
+    scanf("%d %d", &n, &m);
+    char arr[n][m];
     for (int i = 0; i < n; i++)
-        cin >> arr[i];
+        scanf("%s", arr[i]);
     int cost1 = 0, cost2 = 0;
     for (int i = 0; i < n; i++)
-    {
         for (int j = 0; j < m; j++)
         {
             if ((i + j) % 2 == 0 && arr[i][j] != 'R')
@@ -22,7 +21,6 @@ int main()
             if ((i + j) % 2 == 1 && arr[i][j] != 'R')
                 cost2 += 3;
         }
-    }
-    cout << min(cost1, cost2) << endl;
+    printf("%d", min(cost1, cost2));
     return 0;
 }

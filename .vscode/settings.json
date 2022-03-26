@@ -6,6 +6,7 @@
   },
   "java.project.sourcePaths": ["Java/Algorithms", "Java"],
   "files.associations": {
-    "stdio.h": "c"
+    "stdio.h": "c",
+    "random": "c"
   }
 }

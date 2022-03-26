@@ -1,19 +1,42 @@
-#include <stdio.h>
-
+#include<stdio.h>
 int main()
 {
-int a[50], i, n, large, small;
-scanf("%d", &n);
-for (i = 0; i < n; ++i)
-scanf("%d", &a[i]);
-large = small = a[0];
-for (i = 1; i < n; ++i)
+int r,a,b,c,count=0;
+scanf("%d%d%d%d",&r,&a,&b,&c);
+while(r>0)
 {
-if (a[i] > large)
-large = a[i];
-if (a[i] < small)
-small = a[i];
+if(a==25)
+{
+r=r+20;
 }
-printf(large+small);
+r--;
+count++;
+if(r==0)
+break;
+
+if(b==120)
+{
+r=r+80;
+}
+r--;
+count++;
+if(r==0)
+break;
+
+if(c==12)
+{
+r=r+8;
+}
+r--;
+count++;
+if(r==0)
+break;
+a++,b++,c++;
+
+}
+
+printf("Peter plays %d times before going broke",count);
 return 0;
+
+
 }
