@@ -1,28 +1,52 @@
 #include <bits/stdc++.h>
+
 using namespace std;
+
+vector<int> prime;
+int sieve[55], n, arr[55];
+int dp[51][1 << 20];
+
+int get(int i, int mask)
+{
+    if (i == n)
+        return 0;
+    if (dp[i][mask] != -1)
+        return dp[i][mask];
+
+    dp[i][mask] = get(i + 1, mask);
+    int nmask = 0;
+    for (int j = 0; j < prime.size(); ++j)
+    {
+        if (arr[i] % prime[j] == 0)
+        {
+            nmask |= (1 << j);
+        }
+    }
+    if (!(nmask & mask))
+        dp[i][mask] = max(dp[i][mask], 1 + get(i + 1, mask | nmask));
+    return dp[i][mask];
+}
 
 int main()
 {
-    int n, m;
-    cin >> n >> m;
-    vector<string> arr(n);
-    for (int i = 0; i < n; i++)
-        cin >> arr[i];
-    int cost1 = 0, cost2 = 0;
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < m; j++)
+    int i, j, t;
+    for (i = 2; i <= 50; ++i)
+        if (sieve[i] == 0)
         {
-            if ((i + j) % 2 == 0 && arr[i][j] != 'R')
-                cost1 += 3;
-            if ((i + j) % 2 == 1 && arr[i][j] != 'G')
-                cost1 += 5;
-            if ((i + j) % 2 == 0 && arr[i][j] != 'G')
-                cost2 += 5;
-            if ((i + j) % 2 == 1 && arr[i][j] != 'R')
-                cost2 += 3;
+            prime.push_back(i);
+            for (j = i * i; j <= 50; j += i)
+                sieve[j] = 1;
         }
+
+    cin >> t;
+    while (t--)
+    {
+        cin >> n;
+        for (i = 0; i < n; ++i)
+            cin >> arr[i];
+        memset(dp, -1, sizeof(dp));
+        cout << get(0, 0) << endl;
     }
-    cout << min(cost1, cost2) << endl;
+
     return 0;
 }

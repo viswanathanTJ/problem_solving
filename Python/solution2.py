@@ -1,51 +1,26 @@
-class NQueenRow:
-    def __init__(self, n):
-        self.board = [[0]*n]*n
-        # self.solve(n, 0)
-
-    def isSafe(self, n, r, c) -> bool:
-        for i in range(r):
-            if self.board[i][c] == 1:
-                print('1for',i,c)
-                return False
-
-        for i, j in zip(range(r, -1, -1), range(c, -1, -1)):
-            if self.board[i][j] == 1:
-                print('2for',i,j)
-                return False
-            
-        for i, j in zip(range(r, -1, -1), range(c, n)):
-            if self.board[i][j] == 1:
-                print('3for',i,j)
-                return False
-
-        return True
-
-    def solve(self, n, r) -> bool:
-        if r >= n:
-            return True
-        for i in range(n):
-            if self.isSafe(n, r, i) == True:
-                self.board[r][i] = 1
-                if self.solve(n, r+1) == False:
-                    print('rn')
-                    return True
-                else:
-                    self.board[r][i] = 0
-        return False
-
-    def __repr__(self):
-        for l in self.board:
-            for e in l:
-                print(e, end=' ')
-            print()
-        return ''
-
-n = int(input())
-obj = NQueenRow(n)
-print(obj)
-obj.solve(n, 0)
-print(obj)
-
-
-
+n, k = map(int, input().split())
+l = list(map(int, input().split()))
+maxst, minst = [], []
+beg, end, res = 0, 0, 0
+while end < len(l):
+    cur = l[end]
+    while len(maxst) > 0 and l[maxst[-1]] <= cur:
+        del maxst[-1]
+    maxst.append(end)
+    while len(minst) > 0 and l[minst[-1]] >= cur:
+        del minst[-1]
+    minst.append(end)
+    ma_x = l[maxst[0]]
+    mi_n = l[minst[0]]
+    if ma_x - mi_n <= k:
+        curl = end - beg + 1
+        if res < curl:
+            res = curl
+    else:
+        beg += 1
+        while len(minst) > 0 and minst[0] < beg:
+            del minst[0]
+        while len(maxst) > 0 and maxst[0] < beg:
+            del maxst[0]
+    end += 1
+print(res)
