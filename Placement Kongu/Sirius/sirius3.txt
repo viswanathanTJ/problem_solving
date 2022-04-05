@@ -1,0 +1,94 @@
+1.Bridges in a graph
+
+Problem Statement
+
+An edge in an undirected connected graph is a bridge if and only if removing it disconnects the graph , removing it increases number of connected components. Write a program to find the bridges in a graph.
+
+
+import java.io.*;
+import java.util.*;
+class Main{
+    public static List<List<Integer>> adj;
+    public static int time = 0;
+    public static final int INF  = Integer.MIN_VALUE;
+    public static void addEdge(int i, int j){
+        adj.get(i).add(j);
+    }
+    public static void dfsUtil(int s, boolean[] visit, int[] distance, int[] low, int[] parent){
+        visit[s] = true;
+        distance[s] = low[s] = ++time;
+        for(int x : adj.get(s)){
+            if(!visit[x]){
+                parent[x] = s;
+                dfsUtil(x, visit, distance, low, parent);
+                low[s] = Math.min(low[s], low[x]);
+                if(low[x]>distance[s]) System.out.println(s+" "+x);
+            }else if(x!=parent[s]) low[s] = Math.min(low[s], distance[x]);
+        }
+    }
+    public static void dfs(){
+        int N = adj.size();
+        boolean[] visit = new boolean[N];
+        int[] distance = new int[N];
+        int[] low = new int[N];
+        int[] parent = new int[N];
+        for(int i=0; i<N; i++){
+            parent[i] = INF;
+            visit[i] = false;
+        }
+        for(int i=0; i<N; i++) if(!visit[i]) dfsUtil(i, visit, distance, low, parent);
+    }
+    public static final Scanner sn = new Scanner(System.in);
+    public static void main(String[] asdf){
+        int n = sn.nextInt();
+        adj = new ArrayList<>(n);
+        for(int i=0; i<n; i++) adj.add(new ArrayList<>());
+        for(int i=0; i<n; i++) 
+            for(int j=0; j<n; j++){
+                int num = sn.nextInt();
+                if(num==1){
+                    addEdge(i, j);
+                }
+            }
+        System.out.println("Adjacency List Representation:");
+        for(int i=0; i<n; i++){
+            if(adj.get(i).size()!=0){
+                System.out.printf("Node %d is connected to the following nodes ", i);
+                adj.get(i).forEach((x)->System.out.print(x+","));
+                System.out.println();
+            }
+        }
+        System.out.println("Bridges in graph");
+        dfs();
+    }
+}
+
+
+2.Given the schema of Railway Reservation System, write a query to find the train names that are from Chennai to Mumbai, but do not have the source or destination in its name (train_name).
+
+
+
+Sort the output by descending order of train name.
+
+
+
+select train_name from Train where source = 'Chennai' and destination = 'Mumbai' and train_name not in ('Chennai Express', 'Mumbai Express') order by train_name desc;
+
+
+3.Driving License
+
+Check whether the person is eligible for a driving license or not. If the age is less than 18, throw an exception and print "Invalid Age" and quit. If the score is less than 40, throw an exception and print "You should get atleast 40 marks" and quit. Else print "Passed".
+
+
+
+age, mark = map(int, input().split())
+try:
+    if age < 18:
+        raise Exception("Invalid age")
+    if mark < 40:
+        raise Exception("You should get atleast 40 marks")
+    else:
+        raise Exception("Passed")
+except Exception as e:
+    print(age, mark)
+    print(e)

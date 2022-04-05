@@ -1,0 +1,1 @@
+select custid, fname, dob from customer order by dob asc;

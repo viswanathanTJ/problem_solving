@@ -1,0 +1,84 @@
+1.Given the schema of a Payroll Processing System, write a query to insert 5 more records into the Admin table and display them.
+
+INSERT INTO Admin values
+(11,'Kiran',48,'9999998877','kiran@gmail.com','kiran'),
+(12,'Lohit',25,'9858968988','lohit@gmail.com','lohit'),
+(13,'Mona',34,'8596857485','mona@gmail.com','mona'),
+(14,'Naveena',28,'8989898989','naveena@gmail.com','naveena'),
+(15,'Olivia',44,'9988774455','olivia@gmail.com','olivia')
+;
+select * from Admin;
+
+
+2.Binary Search Tree - Vertical Order Traversal
+
+Create a binary search tree consisting of only positive values & print the vertical order traversal of the tree.
+
+import java.io.*;
+import java.util.*;
+class Main{
+    static class Node{
+        Node left, right;
+        int val;
+        Node(int val){
+            this.val = val;
+            left = right = null;
+        }
+    }
+    public static Node insert(Node root, int val){
+        if(root==null) return new Node(val);
+        if(root.val<val) root.right = insert(root.right, val);
+        if(root.val>val) root.left = insert(root.left, val);
+        return root;
+    }
+    public static void print(Node root){
+        Map<Integer, List<Integer>> map = new TreeMap<>();
+        dfs(map, root, 0);
+        for(Map.Entry<Integer, List<Integer>> m : map.entrySet()){
+            m.getValue().forEach((x)->System.out.print(x+" "));
+            System.out.println();
+        }
+    }
+    public static void dfs(Map<Integer, List<Integer>> map, Node root, int ind){
+        if(root==null) return;
+        if(!map.containsKey(ind)) map.put(ind, new ArrayList<>());
+        map.get(ind).add(root.val);
+        if(root.left!=null) dfs(map, root.left, ind-1);
+        if(root.right!=null) dfs(map, root.right, ind+1);
+    }
+    public static final Scanner sn = new Scanner(System.in);
+    public static void main(String[] asdf){
+        Node root = null;
+        while(true){
+            int n = sn.nextInt();
+            if(n<1) break;
+            root = insert(root, n);
+        }
+        print(root);
+    }
+}
+
+
+
+3.Method Override
+
+Create a parent class that consists of two methods m1 and m2. m1 doesn't take any arguments and it just prints from parent.
+
+m2 takes an integer value as a parameter and prints the same. Create a child class that extends parent class and overrides its methods.m1 doesn't take any arguments and it just prints from the child. m2 takes an integer value as a parameter and prints the same. In the main class, create objects for the above classes and call the corresponding methods.
+
+
+class Parent:
+    def m1(self, a):
+        print('From parent m1()')
+        print(a)
+
+class Child:
+    def m1(self, b):
+        print('From child m1()')
+        print(b)
+
+a, b = map(int, input().split())
+p = Parent()
+c = Child()
+p.m1(a)
+c.m1(b)

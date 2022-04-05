@@ -1,3 +1,4 @@
+^\s*$\n
 Kasm UI Login Credentials
 
 ------------------------------------
@@ -24,4 +25,31 @@ Kasm Manager Token
   password: rqD63eq7mxsjerQ0n7BN
 ------------------------------------
 
-^(
+Ubuntu server VB
+Kasm UI Login Credentials
+
+------------------------------------
+  username: admin@kasm.local
+  password: mSwLk8IQ3mgxb
+  Kongu@viswa2k
+------------------------------------
+  username: user@kasm.local
+  password: pA0N5qhZ7GHXP
+------------------------------------
+
+Kasm Database Credentials
+------------------------------------
+  username: kasmapp
+  password: oLX0z7cEiYHqGk77vFOr
+------------------------------------
+
+Kasm Redis Credentials
+------------------------------------
+  password: V0khHKS8T0tK1J3rClYm
+------------------------------------
+
+Kasm Manager Token
+------------------------------------
+  password: rNF8buuLGy3bTq5dQyLs
+------------------------------------
+

@@ -1,0 +1,64 @@
+# Q1 Java
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+class Main {
+    private static String rearrange(String text) {
+        return Arrays.stream(text.split("")) 
+        .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+        .entrySet().stream() 
+        .sorted(Map.Entry.<String, Long>comparingByValue().reversed()
+        .thenComparingInt(e -> text.indexOf(e.getKey()))) 
+        .map(Map.Entry::getKey) 
+        .collect(Collectors.joining()); 
+        }
+        public static void main(String[] args) {
+            Scanner sc = new Scanner(System.in);
+            System.out.println(rearrange(sc.next()));
+        }
+}
+
+# Q2
+n, l = int(input()), list(map(int, input().split()))
+res = -1
+for i in range(n):
+    s = 0
+    for j in range(n):
+        s += j * l[(i+j)%n]
+        res = max(res, s)
+print(res)
+
+
+# Q3
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+        
+class LinkedList:
+    def __init__(self):
+        self.head = None
+    def decimalValue(self, head):
+        res = 0
+        while head:
+            res = (res << 1) + head.data
+            head = head.next
+        return res
+        
+    def addNode(self, datas):
+        for data in datas:
+            newNode = Node(data)
+            if self.head is None:
+                self.head = newNode
+            else:
+                temp = self.head
+                while temp.next:
+                    temp = temp.next
+                temp.next = newNode
+
+if __name__ == '__main__':
+    llist = LinkedList()
+    n, l = int(input()), list(map(int, input().split()))
+    llist.addNode(l)
+    print(llist.decimalValue(llist.head))

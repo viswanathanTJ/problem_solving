@@ -1,0 +1,95 @@
+# Q1 
+n, l = int(input()), list(map(int, input().split()))
+
+def get_max(k, arr):
+  res , ws = 0, 0
+  start = 0
+
+  for we in range(len(arr)):
+    ws += arr[we]  
+    if we >= k-1:
+      res = max(res, ws)
+      ws -= arr[start]  
+      start += 1  
+  return res
+
+for i in range(n):
+    print(get_max(i+1, l), end=' ')
+
+# Q2
+n, l = input(), input().split()
+print(l[0])
+
+
+# Q3 C++
+#include<bits/stdc++.h>
+using namespace std ;
+
+struct node
+{
+  int data ;
+  struct node *left = NULL ;
+  struct node *right = NULL ;
+}*root = NULL , *temp ;
+
+void create(int input)
+{
+  struct node *new_node = new struct node ;
+  new_node -> data = input ;
+  if(root == NULL)
+    root = new_node ;
+  else
+  {
+    temp = root ;
+    while(1)
+    {
+        if(temp->data == input) break;
+      if(input < temp -> data && temp -> left == NULL)
+      {
+        temp -> left = new_node ;
+      	break ;
+      }
+      else if(input > temp -> data && temp -> right == NULL)
+      {
+        temp -> right = new_node ;
+      	break ;
+      }
+      else if(input < temp -> data && temp -> left != NULL)
+        temp = temp -> left ;
+      	
+      else if(input > temp -> data && temp -> right != NULL)
+        temp = temp -> right ;
+    }
+  }
+}
+
+int LCA(struct node *temp, int n1, int n2)
+{
+  if(temp == NULL)
+    return -1 ;
+  
+  else if( (n1 < temp -> data) && (n2 < temp -> data) )
+    return LCA(temp -> left , n1, n2) ;
+
+  else if( (n1 > temp -> data) && (n2 > temp -> data) )
+    return LCA(temp -> right , n1, n2) ;
+    
+  return temp -> data ;
+}
+
+int main()
+{
+  int input ;
+  
+  while(1)
+  {
+    cin >> input ;
+    if(input < 1)
+      break ;
+    create(input) ;
+  }
+  int n1 , n2 ;
+  cin >> n1 >> n2 ;
+  cout << LCA(root, n1, n2) ;
+  return 0 ;
+}

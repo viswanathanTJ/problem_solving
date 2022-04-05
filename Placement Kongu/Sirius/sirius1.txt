@@ -1,0 +1,72 @@
+1.Given the schema of a Bank Management system, Write a query to display the custid, fname and customer's dob. Display in sorted order of date of birth year and within that sort by firstname.
+
+select custid, fname, dob from customer order by dob asc;
+
+
+2.Multilevel Inheritance:
+
+Create a class 'Parent'. 'Parent' class should have a method 'add' which prints the addition of 2 integers. Create a class 'Child1' which should be a child class of 'Parent' class. 'Child' class should have a method 'sub' which prints subtraction of 2 integers. Create a class 'Child2' which should be a child class of 'child1' class. 'Child' class should have a method 'mul' which prints multiplication of 2 integers. Create an object for a 'Child' class. Call the 3 methods to add, sub and mul from child class object and display the result.
+
+
+
+class Parent:
+    def add(a, b):
+        return a+b
+    pass
+class Child1(Parent):
+    def sub(a, b):
+        return a-b
+    pass
+class Child2(Child1):
+    def mul(a, b):
+        return a*b
+    pass
+if __name__=='__main__':
+    a, b = int(input()), int(input())
+    c = Child2
+    print(c.add(a, b))
+    print(c.sub(a, b))
+    print(c.mul(a, b))
+
+
+
+
+3.Print the Linked List
+
+In a class, there are N number of students. All the students plan to play a game by creating a circle and pronounce something in numbers which they would like. The main task of the game is to select one student from a given position and pronounce something and then is the turn of next student and so on till one before of the selected student. 
+
+Write a program to print the link list created by you from the given position.
+
+class Node:
+    def __init__(self, val):
+        self.val = val
+        self.next = None
+
+def insert(head, val):
+    new = Node(val)
+    if not head: return new
+    else:
+        cur = head
+        while cur.next:
+            cur = cur.next
+        cur.next = new
+    return head
+
+def pprint(k, head, n):
+    cur, temp = head, head
+    for i in range(k-1):
+        cur = cur.next
+    while cur:
+        print(cur.val, end=' ')
+        cur = cur.next
+    for i in range(k-1):
+        print(temp.val, end=' ')
+        temp = temp.next
+
+head = None
+n, l, k = int(input()), list(map(int, input().split())), int(input())
+
+for i in l:
+    head = insert(head, i)
+
+pprint(k, head, n)

@@ -1,0 +1,26 @@
+# Q1 
+n, l, k = int(input()), sorted(map(int, input().split())), int(input())
+
+r = 10**9
+for i in range(n-k):
+    tl = l[i:i+k]
+    r = min(r, max(tl)-min(tl))
+print(r)
+
+# Q2
+s = input()
+if s==s[::-1]:
+    print(s, 'is palindrome')
+else:
+ print(s, 'is not a palindrome')
+
+
+# Q3
+n, l, m = int(input()), list(map(int, input().split())), list(map(int, input().split()))
+
+r = 10**9
+for i in range(n):
+    for j in range(n):
+        if i!=j and l[i]==m[j]:
+            r = min(r, l[i]+m[j])
+print(r)
