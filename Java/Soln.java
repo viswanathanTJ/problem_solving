@@ -158,6 +158,7 @@ class Soln {
         Scanner sc = new Scanner(System.in);
         // System.out.println(factorial(5));
         System.out.println(reverseString("hello world"));
+        sc.close();
         // int n = sc.nextInt();
         // int[] arr = new int[n];
         // for (int i = 0; i < n; i++)

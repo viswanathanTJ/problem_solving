@@ -34,7 +34,7 @@ class Solution
     {
         Scanner sc = new Scanner(System.in);
         String s1 = "abcdef";
-        String s2 = "abcdfg";
         System.out.println((int)s1.charAt(4));
+        sc.close();
     } 
 }

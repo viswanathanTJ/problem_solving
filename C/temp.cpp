@@ -1,52 +1,75 @@
-#include <bits/stdc++.h>
-
+#include<bits/stdc++.h>
 using namespace std;
-
-vector<int> prime;
-int sieve[55], n, arr[55];
-int dp[51][1 << 20];
-
-int get(int i, int mask)
-{
-    if (i == n)
-        return 0;
-    if (dp[i][mask] != -1)
-        return dp[i][mask];
-
-    dp[i][mask] = get(i + 1, mask);
-    int nmask = 0;
-    for (int j = 0; j < prime.size(); ++j)
-    {
-        if (arr[i] % prime[j] == 0)
-        {
-            nmask |= (1 << j);
-        }
+int ans[10000000];
+int dp[1000000];
+int solve(int num)
+ {
+   if(num<0) return 0;
+   if(dp[num]!=-1)
+     {
+     return dp[num];
     }
-    if (!(nmask & mask))
-        dp[i][mask] = max(dp[i][mask], 1 + get(i + 1, mask | nmask));
-    return dp[i][mask];
-}
-
-int main()
-{
-    int i, j, t;
-    for (i = 2; i <= 50; ++i)
-        if (sieve[i] == 0)
-        {
-            prime.push_back(i);
-            for (j = i * i; j <= 50; j += i)
-                sieve[j] = 1;
-        }
-
-    cin >> t;
-    while (t--)
+    else
     {
-        cin >> n;
-        for (i = 0; i < n; ++i)
-            cin >> arr[i];
-        memset(dp, -1, sizeof(dp));
-        cout << get(0, 0) << endl;
+       long long int ret=0;
+       int k=num;
+       while(k!=0)
+        {
+           
+           int v=k%10;
+           if(v!=0)
+    ret+=solve(num-v*v);
+    k/=10;  
+      }
+      if(ret)
+      dp[num]=1;
+      else dp[num]=0;
+      return dp[num];
     }
-
     return 0;
-}
+ }
+int main()
+ {
+   int t;
+   cin>>t;
+   memset(dp,-1,sizeof dp);
+  
+  for(int i=0;i<10;i++)
+   {
+    int num=1;
+     for(int j=1;j<=i;j++)
+      {
+       num*=i;
+   }
+   if(num<=1000000)
+   {
+    dp[num]=1;
+   
+   }
+   
+   }
+  //  solve(10);
+    for(int i=0;i<=1000000;i++)
+     {
+       int ty= solve(i);
+       if(ty>=0) 
+       {
+         ans[i]=1; 
+    }
+  }
+   while(t--)
+   {
+    
+    int n;
+       cin>>n;
+       if(dp[n])
+        {
+         cout<<"Yes"<<endl;
+     }
+     else
+     {
+      cout<<"No"<<endl;
+     }
+   }
+  
+ }
