@@ -27,8 +27,8 @@ void qsort(int ar[], int start, int end) {
 }
 
 int main() {
-    int arr[] = {3, 4, 2, 1, 5, 3, 7, 23};
-    qsort(arr, 0, 8);
+    int arr[] = {69,14,59,18,25,81,35,12};
+    qsort(arr, 0, 7);
     for (int i = 0; i < 8;i++)
         printf("%d ", arr[i]);
 }

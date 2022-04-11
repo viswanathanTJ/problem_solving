@@ -6,5 +6,6 @@ for i in l:
     for x in mods:
         if x % i:
             f = 0
-    if f: r += 1
+    if f:
+        r += 1
 print(r)
