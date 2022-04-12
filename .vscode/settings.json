@@ -4,9 +4,13 @@
     "java": "cd $dir && javac $fileName && cat ../input.txt | java $fileNameWithoutExt && cd ..",
     "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && cat ../input.txt | $dir$fileNameWithoutExt && cd ..",
   },
-  "java.project.sourcePaths": ["Java/Algorithms", "Java"],
+  "java.project.sourcePaths": [
+    "Java/Algorithms",
+    "Java"
+  ],
   "files.associations": {
     "stdio.h": "c",
     "random": "c"
-  }
+  },
+  "C_Cpp.errorSquiggles": "Disabled"
 }

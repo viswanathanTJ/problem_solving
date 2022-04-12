@@ -1,75 +1,68 @@
 #include <stdio.h>
+int n, c = 1, a[100][100];
+
+void rec(int start)
+{
+    int i, j;
+    for (i = start - 1; i < n; i++)
+    {
+        for (j = start; j < n - 1; j++)
+        {
+            if (i + 1 == j)
+            {
+                // if (c == 15)
+                // {
+                //     printf("c is 15 %d %d\n", i, j);
+                // }
+                a[i][j] = c++;
+                // printf("%d %d = %d\n", i, j, a[i][j]);
+                break;
+            }
+        }
+    }
+    // bottom right to top
+    i = start + 1;
+    for (j = i - start; j > 0; j--)
+        a[j][i] = c++;
+}
 
 int main()
 {
-    int r, m1, m2, m3;
-    scanf("%d %d %d %d", &r, &m1, &m2, &m3);
-    int c1 = 0, c2 = 0, c3 = 0;
-    int n1 = 0, n2 = 0, n3 = 0;
-    int t1 = 25 - m1;
-    int t2 = 120 - m2;
-    int t3 = 12 - m3;
-    while (r > 0)
-    {
-        c1++;
-        if (n1 == 0 && c1 == t1)
-        {
-            r += 20;
-            r--;
-            n1 = t1 + 25;
-        }
-        else if (c1 == n1)
-        {
-            n1 += 25;
-            r += 20;
-            r--;
-        }
-        else
-        {
-            r--;
-            if (r == 0)
-                break;
-        }
-        c2++;
-        if (n2 == 0 && c2 == t2)
-        {
-            r += 80;
-            r--;
-            n2 = t2 + 120;
-        }
-        else if (c2 == n2)
-        {
-            n2 += 120;
-            r += 80;
-            r--;
-        }
-        else
-        {
-            r--;
-            if (r == 0)
-                break;
-        }
-        c3++;
-        if (c3 == t3 && n3 == 0)
-        {
-            r += 8;
-            r--;
-            n3 = t3 + 12;
-        }
-        else if (c3 == n3)
-        {
-            n3 += 12;
-            r += 8;
-            r--;
-        }
-        else
-        {
-            r--;
-            if (r == 0)
-                break;
-        }
-    }
-    printf("Peter plays %d times before going broke", c1 + c2 + c3);
+    int i, j;
+    n = 6;
+    // assigning zeros to the array
+    for (i = 0; i < n; i++)
+        for (j = 0; j < n; j++)
+            a[i][j] = 0;
+    // center value added
+    for (i = 0; i < n; i++)
+        for (j = 0; j < n; j++)
+            if (i == j)
+                a[i][j] = c++;
+    // bottom right to top
+    i = n - 1;
+    for (j = n - 2; j >= 0; j--)
+        a[j][i] = c++;
 
+    // top right to top left
+    i = 0;
+    for (j = n - 2; j > 0; j--)
+        a[i][j] = c++;
+
+    // filling recursively
+    for (i = 2; i < n - 1; i += 2)
+    {
+        // printf("rec %d\n", i);
+        rec(i);
+        c--;
+    }
+
+    // print array
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < n; j++)
+            printf("%d ", a[i][j]);
+        printf("\n");
+    }
     return 0;
 }
