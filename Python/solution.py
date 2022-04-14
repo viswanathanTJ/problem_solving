@@ -1,20 +1,14 @@
-n = 5
-m = [[0]*n]*n
-print(m)
-c = 1
-# for i in range(n):
-#     for j in range(n):
-#         m[i][j] = 0
-for i in range(n):
-    for j in range(n):
-        if i==j:
-            m[i][j] = c
-            print(i,j, m[i][j])
-            c += 1
-
-for i in range(n):
-    for j in range(n):
-        print(m[i][j], end=' ')     
-    print()
-
-# print(m)
+from itertools import cycle
+n = 3
+matrix = [[0] * n for _ in range(n)]
+directions = cycle([(0, 1), (1, 0), (0, -1), (-1, 0)])
+row, col = 0, 0
+x, y = next(directions)
+print(x,y)
+for i in range(1, n ** 2 + 1):
+    matrix[row][col] = i
+    if not (0 <= row + x < n and 0 <= col + y < n and matrix[row + x][col + y] == 0):
+        x, y = next(directions)
+        row += x
+    col += y
+print(matrix)
