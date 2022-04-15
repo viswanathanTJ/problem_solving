@@ -1,34 +1,32 @@
-n = 5
-arr = [[0] * n for _ in range(n)]
-c = 1
-def draw(index, center):
-    global c
-    # center values
-    for i in range(index, n):
-        for j in range(index, n):
-            if i+center == j:
-                print(i+center, j)
-                arr[i+center][j] = c
-                c += 1
-    # for j in range(index, n-1):
-    # br to tr
-    # i = n - index - 1
-    # for j in range(i-1, -1, -1):
-    #     arr[j][i] = c
-    #     c += 1
-    # # tr to tl
-    # i = index
-    # for j in range(n-index-2, 0, -1):
-    #     arr[i][j] = c
-    #     c += 1
+n = 7
+mat = [[0]*n for _ in range(n)]
+visited = [0] * n
 
-def print_arr(arr):
-    print (' ', '00', '01', '02', '03', '04')
+while 1:
+    s, e, w = map(int, input().split())
+    if s == -1:
+        break
+    mat[s][e] = w
+    mat[e][s] = w
+
+keys = [float('inf')] * n
+keys[0] = 0
+
+def get_min():
+    m, mi = float('inf'), 0
     for i in range(n):
-        print(i, end=' ')
-        for j in range(n):
-            print(f'{arr[i][j]:02d}', end=' ')
-        print()
-draw(0, 0)
-draw(2, 1)
-print_arr(arr)
+        if not visited[i] and m > keys[i]:
+            m = keys[i]
+            mi = i
+    visited[mi] = 1
+    return mi
+
+for _ in range(n):
+    parent = get_min()
+    for i in range(n):
+        if not visited[i] and mat[parent][i] and \
+                keys[i] > mat[parent][i] + keys[parent]:
+            keys[i] = mat[parent][i] + keys[parent]
+            
+for i in range(n):
+    print(0, 'to', i, 'is', keys[i])

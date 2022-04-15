@@ -1,0 +1,8 @@
+# Reverse word
+for x in input().split()[::-1]:
+    print(x, end=' ')
+# Pond last value
+n, res = int(input()), 1
+while res <= n:
+    res <<= 1
+print(res>>1)
