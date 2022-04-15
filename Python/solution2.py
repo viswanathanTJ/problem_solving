@@ -1,32 +1,50 @@
-n = 7
-mat = [[0]*n for _ in range(n)]
-visited = [0] * n
+from random import shuffle
 
-while 1:
-    s, e, w = map(int, input().split())
-    if s == -1:
-        break
-    mat[s][e] = w
-    mat[e][s] = w
+class Node:
+    def __init__(self, val, left=None, right=None):
+       self.val = val
+       self.left = left
+       self.right = right
+    
+l = list(range(10, 15))
+shuffle(l)
+print(l)
+tree = None
+def insert(root, val):
+    if root is None:
+        return Node(val)
+    elif root.val > val:
+        root.left = insert(root.left, val)
+    elif root.val < val:
+        root.right = insert(root.right, val)
+    return root
 
-keys = [float('inf')] * n
-keys[0] = 0
+for x in l:
+    tree = insert(tree, x)
 
-def get_min():
-    m, mi = float('inf'), 0
-    for i in range(n):
-        if not visited[i] and m > keys[i]:
-            m = keys[i]
-            mi = i
-    visited[mi] = 1
-    return mi
+def inorder(root):
+    if root is not None:
+        inorder(root.left)
+        print(root.val, end=' ')
+        inorder(root.right)
 
-for _ in range(n):
-    parent = get_min()
-    for i in range(n):
-        if not visited[i] and mat[parent][i] and \
-                keys[i] > mat[parent][i] + keys[parent]:
-            keys[i] = mat[parent][i] + keys[parent]
-            
-for i in range(n):
-    print(0, 'to', i, 'is', keys[i])
+print('inorder')
+inorder(tree)
+
+def level_order(root):
+    if root is None:
+        return
+    q = []
+    q.append(root)
+    while q:
+        for _ in range(len(q)):
+            cur = q.pop(0)
+            print(cur.val, end=' ')
+            if cur.left is not None:
+                q.append(cur.left)
+            if cur.right is not None:
+                q.append(cur.right)
+        print()
+
+print('\nlevel order')
+level_order(tree)
