@@ -1,25 +1,51 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
+int n, ptr[1 << 20][26], cnt[1 << 20], nodes;
+long long ans[1 << 20];
 
-long long arr[100005];
-int main()
+void walk(int u, int x)
 {
-  int k, n;
-  cin >> k >> n;
-  long long sum = 0;
-  arr[0] = 0;
-  for (int i = 1; i <= n; i++)
+  ans[x] += (long long)cnt[u] * (cnt[u] - 1) / 2;
+  for (int d = 0; d < 26; ++d)
   {
-    cin >> arr[i];
-    sum += arr[i];
-    arr[i] += arr[i - 1];
+    if (ptr[u][d])
+      walk(ptr[u][d], x + 1);
   }
-  int p = n - k;
-  long long maxi = 0;
-  for (int i = 1; i <= n - p + 1; i++)
+}
+
+int main()
+
+{
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
+  for (int ks = 1; ks <= 1000000000 && 1 == scanf("%d", &n); ++ks)
   {
-    long long here = arr[i + p - 1] - arr[i - 1];
-    maxi = max(maxi, sum - here);
+    nodes = 1;
+    int l = 0;
+    char buf[1 << 20];
+    for (int i = 0; i < n && 1 == scanf("%s", buf); ++i)
+    {
+      const char *p = buf;
+      int u = 0;
+      while (*p)
+      {
+        ++cnt[u];
+        int d = *p - 'a';
+        if (!ptr[u][d])
+          ptr[u][d] = nodes++;
+        u = ptr[u][d];
+        ++p;
+      }
+      ++cnt[u];
+      l = max(l, int(p - buf));
+    }
+    walk(0, 0);
+    for (int i = 0; i < l; ++i)
+      ans[i] -= ans[i + 1];
+    for (int i = 0; i <= l; ++i)
+      cout << ans[i] << " ";
+    puts("");
   }
-  cout << maxi;
+  return 0;
 }

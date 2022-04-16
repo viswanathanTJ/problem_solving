@@ -1,50 +1,52 @@
-import java.io.*;
-import java.util.Arrays;
-
-class Main {
-    public static void main(String[] args) throws Exception {
-        code object = new code();
-        BufferedReader buf = new BufferedReader(new InputStreamReader(System.in));
-        String[] str1 = buf.readLine().split(" ");
-        int P = Integer.parseInt(str1[0]);
-        int Q = Integer.parseInt(str1[1]);
-        int N = Integer.parseInt(str1[2]);
-
-        int[] aliens = new int[N];
-        int[] golds = new int[N];
-        for (int i = 0; i < N; i++) {
-            String[] temp = buf.readLine().split(" ");
-            aliens[i] = Integer.parseInt(temp[0]);
-            golds[i] = Integer.parseInt(temp[1]);
+class Main{
+    static long sol[] = new long[1000001];
+    
+    static class Trie{
+        int count;
+        Trie link[];
+        
+        public Trie(){
+            count = 0;
+            link = new Trie[26];
         }
-
-        object.Gold(P, Q, N, aliens, golds);
     }
-}
-
-class code {
-    void Gold(int P, int Q, int n, int[] alien, int[] gold) {
-        if (n == 2) {
-            if ((alien[0] < P && alien[1] < P && alien[0] < Q && alien[1] < Q)
-                    || (alien[0] > P && alien[1] < 2 * P && alien[0] < Q && alien[1] < Q)) {
-                System.out.println(Math.max(gold[0], gold[1]));
-            } else {
-                System.out.println(0);
+    
+    static Trie root = new Trie();
+    
+    public static void addString(String s){
+        int l = s.length();
+        Trie ptr = root;
+        
+        for(int i=0; i<l; i++){
+            int curr = s.charAt(i)-'a';
+            
+            if(ptr.link[curr] == null){
+                sol[i] = sol[i] + (long)ptr.count;
+                ptr.link[curr] = new Trie();
             }
-        } else {
-            int val = P / Q;
-            if (val % 2 != 0 || val == 0) {
-                Arrays.sort(gold);
-                int s = 0;
-                for (int i = 0; i < n; i++)
-                    s += gold[i];
-                System.out.println(s - gold[0]);
-            } else {
-                int s = 0;
-                for (int i = 0; i < n; i++)
-                    s += gold[i];
-                System.out.println(s);
+            else{
+                sol[i] = sol[i]+(long)(ptr.count-ptr.link[curr].count);
+                if(i == l-1)
+                    sol[i+1] = sol[i+1] + ptr.link[curr].count;
             }
+            ptr.count++;
+            ptr = ptr.link[curr];
         }
+        ptr.count++;
+    }
+    public static void main(String args[] ) throws Exception {
+        
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        int ml = 0;
+        while(n-- > 0){
+            String s = br.readLine();
+            if(s.length() > ml)
+                ml = s.length();
+            addString(s);
+        }
+        
+        for(int i=0; i<=ml; i++)
+            System.out.print(sol[i]+" "); 
     }
 }

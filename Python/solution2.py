@@ -1,20 +1,29 @@
-s = input()
-s = 'BRLXRewjQULBgycRATXhsY'
-primes = [67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113]
-res = ''
-for x in s:
-    o = ord(x)
-    t = len(res)
-    for p in range(12):
-        if o == primes[p]:
-            res += chr(o)
+# n, res = int(input()), 0
+from platform import java_ver
+
+
+n, res = 20, 0
+
+def is_prime(n):
+    for i in range(2, int(n**.5)+1):
+        if not n % i:
+            return 0
+    # return all(n % j for j in range(2, int(n**0.5)+1)) and n > 1
+    return 1
+def solve(n):
+    global res
+    if n <= 3:
+        res += n
+        return
+    for i in range(n-1, 2, -1):
+        if not n%i and is_prime(i):
+            res += 1
+            solve(i)
             break
-        elif o > primes[11]:
-            res += chr(primes[11])
-            break
-        elif o < primes[p]:
-            diff = primes[p] - o
-            diff1 = o - primes[p-1] if p > 0 else 90
-            res += chr(primes[p] if diff < diff1 else primes[p-1])
-            break
+    else:
+        res += 1
+        print(n, 'no rep')
+        solve(n-1)
+
+solve(n)
 print(res)
