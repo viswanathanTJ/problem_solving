@@ -1,20 +1,30 @@
-s = "11111222223"
-k = 3
-s, k = '1', 2
+from collections import defaultdict
 
-def solve(d):
-    if len(d) == k:
-        # print(d)
-        return d
-    if len(d) < k:
-        return d
-    t = ''
-    i = 0
-    while i < len(d)-k:
-        t += str(sum(map(int, d[i:k+i])))
-        i += k
-    t += str(sum(map(int, d[i:])))
-    return solve(t)
 
-res = solve(s)
-print(res)
+n, m = map(int, input().split())
+graph = defaultdict(list)
+for _ in range(m):
+    s, e, t = map(int, input().split())
+    graph[s].append((e, t))
+
+for k in graph.keys():
+    print(k, graph.get(k))
+
+visited = [0] * (n+1)
+l = []
+
+def dfs(v):
+    visited[v] = 1
+    l.append(v)
+    for i in range(n+1):
+        if not visited[i] and (i in [x[0] for x in graph[v]]):
+            dfs(i)
+
+dfs(1)
+print(l)
+
+destroy = 0
+for key in graph.keys():
+    for e, w in graph.get(key):
+        if w == 3:
+            print('1 enough')
