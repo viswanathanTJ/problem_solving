@@ -1,13 +1,20 @@
-s = []
+s = "11111222223"
+k = 3
+s, k = '1', 2
 
-for _ in range(int(input())):
-    l = list(map(int, input().split()))
-    q = l[0]
-    if q == 1:
-        s.append(l[1])
-    elif q == 2:
-        k, ind = l[1], l[2]
-        t = []
-        for x in s:
-            t.append(x ^ k)
-        print(sorted(t)[ind-1])
+def solve(d):
+    if len(d) == k:
+        # print(d)
+        return d
+    if len(d) < k:
+        return d
+    t = ''
+    i = 0
+    while i < len(d)-k:
+        t += str(sum(map(int, d[i:k+i])))
+        i += k
+    t += str(sum(map(int, d[i:])))
+    return solve(t)
+
+res = solve(s)
+print(res)
