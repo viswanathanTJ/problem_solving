@@ -1,40 +1,30 @@
-def max_edge_remove(n, edges):
-    def find(dsu, x):
-        if dsu[x] == -1: return x
-        dsu[x] = find(dsu, dsu[x])
-        return dsu[x]
+from mimetypes import init
 
-    def union(dsu,x,y):
-        res1,res2 = find(dsu,x),find(dsu,y)
-        if res1==res2: return False
-        dsu[res1] = res2
-        return True
+from idna import valid_contextj
+
+
+class TreeNode:
+    def __init__(self, val) -> None:
+        self.val = val
+        self.left, self.right = None, None
     
-    if n==1: return 0
-    
-    tot,rem1,rem2 = 0,n,n
-    dsu1,dsu2 = {i:-1 for i in range(1,n+1)},{i:-1 for i in range(1,n+1)}
-    print(dsu2)
-    edges.sort(key=lambda x:x[2],reverse=True)
+l = [3, 4,32,41,23,12]
+def insert(root, val):
+    if root is None:
+        return TreeNode(val)
+    elif root.val < val:
+        root.right = insert(root.right, val)
+    elif root.val > val:
+        root.left = insert(root.left, val)
+    return root
+root = None
+for i in l:
+    root = insert(root, i)
 
-    for x,y,col in edges:
-        if col==3: 
-            res=union(dsu1,x,y); union(dsu2,x,y)
-            if res: rem1-=1; rem2-=1; tot += 1
-        elif col==1: 
-            res=union(dsu1,x,y)
-            if res: rem1-=1; tot += 1
-        else: 
-            res=union(dsu2,x,y)
-            if res: rem2-=1; tot += 1
-        if rem1==1 and rem2==1: return len(edges)-tot
 
-    
-    return -1
-
-n, m = map(int, input().split())
-l = []
-for _ in range(m):
-    l.append(list(map(int, input().split())))
-
-print(max_edge_remove(n, l))
+def inorder(root):
+    if root:
+        inorder(root.left)
+        print(root.val, end=' ')
+        inorder(root.right)
+inorder(root)
