@@ -1,68 +1,27 @@
-#include <stdio.h>
-int n, c = 1, a[100][100];
+// Write a program to find the total expenses including the discount.Given the ticket cost as 'X'.If the number of tickets purchased is less than 50, there is no discount.If the number of tickets purchased is between 50 and 100(both inclusive), then 10 % discount is offered.If the number of tickets purchased is between 101 and 200(both inclusive), 20 % discount is offered.If the number of tickets purchased is between 201 and 400(both inclusive), 30 % discount is offered.If the number of tickets purchased is between 401 and 500(both inclusive), 40 % discount is offered.If the number of tickets purchased is greater than 500, then 50 % discount is offered.
 
-void rec(int start)
-{
-    int i, j;
-    for (i = start - 1; i < n; i++)
-    {
-        for (j = start; j < n - 1; j++)
-        {
-            if (i + 1 == j)
-            {
-                // if (c == 15)
-                // {
-                //     printf("c is 15 %d %d\n", i, j);
-                // }
-                a[i][j] = c++;
-                // printf("%d %d = %d\n", i, j, a[i][j]);
-                break;
-            }
-        }
+#include<stdio.h>
+
+int main() {
+    int cost, n;
+    scanf("%d %d", &cost, &n);
+    switch(n) {
+        case 1 ... 49:
+            break;
+        case 50 ... 99:
+            cost -= (cost*0.1);
+            break;
+        case 101 ... 200:
+            cost -= (cost*0.2);
+            break;
+        case 201 ... 400:
+            cost -= (cost*0.3);
+            break;
+        case 401 ... 500:
+            cost -= (cost*0.4);
+            break;
+        default:
+            cost -= (cost*0.5);
     }
-    // bottom right to top
-    i = start + 1;
-    for (j = i - start; j > 0; j--)
-        a[j][i] = c++;
-}
-
-int main()
-{
-    int i, j;
-    n = 6;
-    // assigning zeros to the array
-    for (i = 0; i < n; i++)
-        for (j = 0; j < n; j++)
-            a[i][j] = 0;
-    // center value added
-    for (i = 0; i < n; i++)
-        for (j = 0; j < n; j++)
-            if (i == j)
-                a[i][j] = c++;
-    // bottom right to top
-    i = n - 1;
-    for (j = n - 2; j >= 0; j--)
-        a[j][i] = c++;
-
-    // top right to top left
-    i = 0;
-    for (j = n - 2; j > 0; j--)
-        a[i][j] = c++;
-
-    // filling recursively
-    for (i = 2; i < n - 1; i += 2)
-    {
-        // printf("rec %d\n", i);
-        rec(i);
-        c--;
-    }
-
-    // print array
-    for (i = 0; i < n; i++)
-    {
-        for (j = 0; j < n; j++)
-            printf("%d ", a[i][j]);
-        printf("\n");
-    }
-    return 0;
+    printf("%d.00", cost*n);
 }

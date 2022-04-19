@@ -2,12 +2,12 @@
 
 int main()
 {
-    int p[] = {3, 4, 5, 0, 1, 2, 7, 6};
-    char a[10][10] = {"LB", "MB", "UB", "LB", "MB", "UB", "SU", "SL"};
-    int n;
-    scanf("%d", &n);
-    int c, b;
-    c = (n - 1) / 8;
-    b = (n - 1) % 8;
-    printf("%d%s", c * 8 + p[b] + 1, a[b]);
+    int a,b,n;
+    scanf("%d %d %d", &a, &b, &n);
+    for(int i=0;i<n;i++)
+        if(i%2)
+            b *= 2;
+        else
+            a *= 2;
+    printf("%d", a+b);
 }
