@@ -1,11 +1,22 @@
-from cmath import log
-import logging
+n, r = int(input()), 0
 
-logging.basicConfig(filename='log.log', filemode='a', format='%(asctime)s - %(name)s - %(levelname)s\
-    %(message)s', level=logging.info)
+def splitter(n, s):
+    global r
+    while n >= s:
+        x = n%(s*10)
+        if x!=0 and x % 11 == 0:
+            r += 1
+        n = n//10
 
-logging.warning('warning1')
-logging.info('info1')
-logging.critical('critical1')
-logging.debug('debug1')
-logging.error('error1')
+t = n
+c = 0
+while t > 0:
+    if t!=0 and (t % 10) % 11 == 0:
+        r += 1
+    c += 1
+    t = t//10
+i = 10
+for _ in range(1, c):
+    splitter(n, i)
+    i *= 10
+print(r)
