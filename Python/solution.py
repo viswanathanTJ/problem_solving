@@ -1,10 +1,11 @@
-def gcd(x, y):
-    while(y):
-       x, y = y, x % y
-    return x
+from cmath import log
+import logging
 
-n, l = int(input()), list(map(int, input().split()))
-res = -1
-for i in range(n-1):
-    res = max(res, (l[i] * l[i+1]) // gcd(l[i], l[i+1]))
-print(res)
+logging.basicConfig(filename='log.log', filemode='a', format='%(asctime)s - %(name)s - %(levelname)s\
+    %(message)s', level=logging.info)
+
+logging.warning('warning1')
+logging.info('info1')
+logging.critical('critical1')
+logging.debug('debug1')
+logging.error('error1')
