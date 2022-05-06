@@ -1,17 +1,20 @@
-n = 4
-res = 999
-l = [3, 2, 4, 1, 9]
-fres = 0
-for i in range(2, 9):
-    # print(n&(n^i), end=' ')
-    x = i
-    for e in l:
-        res = min(res, e&(e^i))
-    nl = l[:]
-    nl[0] = res
-    t = nl[0]
-    print(nl)
-    for j in range(1, len(nl)):
-        t = t ^ nl[j]
-    fres = max(fres, t)
-print(fres)
+def maxArea(H, n):
+    ans, i, j = 0, 0, n-1
+    s, e = 0, 0
+    while i < j:
+        if H[i] <= H[j]:
+            res = H[i] * (j - i)
+            i += 1
+        else:
+            res = H[j] * (j - i)
+            j -= 1
+        if res > ans:
+            s, e = i, j
+            k = min(H[i-1], H[j])
+    ans = 0
+    for x in range(s, e):
+        ans += k - H[x]
+    return ans
+
+n, l = int(input()), list(map(int, input().split()))
+print(maxArea(l, n))

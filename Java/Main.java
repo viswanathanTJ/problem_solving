@@ -1,52 +1,29 @@
-class Main{
-    static long sol[] = new long[1000001];
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
+class Main {
     
-    static class Trie{
-        int count;
-        Trie link[];
+   public static void main (String[] args)
+    {
+        Student s = new Student("viswa", 22);
+        String fileName = "test.txt";
+        FileOutputStream fileOut = null;
+        ObjectOutputStream objOut = null;
         
-        public Trie(){
-            count = 0;
-            link = new Trie[26];
+        try {
+            fileOut = new FileOutputStream(fileName);
+            objOut = new ObjectOutputStream(fileOut);
+
+            objOut.writeObject(s);
+            objOut.close();
+            fileOut.close();
+            System.out.println("Object has been serialized to file");
+        } catch(IOException ex) {
+            System.out.println("IOException occurred");
+            ex.printStackTrace();
         }
-    }
-    
-    static Trie root = new Trie();
-    
-    public static void addString(String s){
-        int l = s.length();
-        Trie ptr = root;
-        
-        for(int i=0; i<l; i++){
-            int curr = s.charAt(i)-'a';
-            
-            if(ptr.link[curr] == null){
-                sol[i] = sol[i] + (long)ptr.count;
-                ptr.link[curr] = new Trie();
-            }
-            else{
-                sol[i] = sol[i]+(long)(ptr.count-ptr.link[curr].count);
-                if(i == l-1)
-                    sol[i+1] = sol[i+1] + ptr.link[curr].count;
-            }
-            ptr.count++;
-            ptr = ptr.link[curr];
-        }
-        ptr.count++;
-    }
-    public static void main(String args[] ) throws Exception {
-        
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
-        int ml = 0;
-        while(n-- > 0){
-            String s = br.readLine();
-            if(s.length() > ml)
-                ml = s.length();
-            addString(s);
-        }
-        
-        for(int i=0; i<=ml; i++)
-            System.out.print(sol[i]+" "); 
+
+        System.out.println(s);
     }
 }
