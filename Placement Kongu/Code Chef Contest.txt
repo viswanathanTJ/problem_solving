@@ -1,0 +1,240 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        int n;
+        cin >> n;
+        int a[n];
+        int count = 0;
+
+        for (int i = 0; i < n; i++)
+        {
+            cin >> a[i];
+        }
+        sort(a, a + n);
+
+        int ans = *max_element(a, a + n);
+
+        if (a[n - 2] < ans)
+        {
+            cout << "peace:)" << endl;
+        }
+        else if (a[n - 2] == ans)
+        {
+            cout << "fight:(" << endl;
+        }
+    }
+
+    return 0;
+}
+
+#cc2
+/* package codechef; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Codechef
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+        int size=Integer.parseInt(br.readLine());
+        if(size<=0){
+            System.out.println("Invalid Input");
+            return;
+        }
+        List<String> arr=new ArrayList<>();
+        while(size-->0){
+            String[] str=br.readLine().split(" ");
+            String pattern1="[a-m]+";
+            String pattern2="[N-Z]+";
+            int words=Integer.parseInt(str[0]);
+            boolean flag=true;
+            for(int i=1;i<=words;i++){
+                boolean match1=str[i].matches(pattern1);
+                boolean match2=str[i].matches(pattern2);
+                if((match1 && match2) || (!match1 && !match2)){
+                    flag=false;
+                    break;
+                }
+            }
+            if(flag)
+                arr.add("YES");
+            else 
+                arr.add("NO");
+
+        }
+        for(String s:arr)
+            System.out.println(s);
+	}
+}
+
+#cc3
+Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+
+        Interval[] ni = new Interval[n];
+        Interval[] mi = new Interval[m];
+
+        for (int i = 0; i < n; i++) {
+            long start = sc.nextLong();
+            long end = sc.nextLong();
+            ni[i] = new Interval(start, end);
+        }
+
+        for (int i = 0; i < m; i++) {
+            long start = sc.nextLong();
+            long end = sc.nextLong();
+            mi[i] = new Interval(start, end);
+        }
+        Arrays.sort(ni, Comparator.comparingLong(b -> b.start));
+        Arrays.sort(mi, Comparator.comparingLong(b -> b.start));
+        long ans = 0;
+        int i = 0, j = 0;
+        while (i < n && j < m) {
+            long l = max(ni[i].start, mi[j].start);
+            long r = min(ni[i].end, mi[j].end);
+
+            if (l <= r)
+                ans += r - l;
+
+            if (ni[i].end < mi[j].end)
+                i++;
+            else
+                j++;
+        }
+        System.out.println(ans);
+    }
+
+    static long max(long a, long b) {
+        return a > b ? a : b;
+    }
+
+    static long min(long a, long b) {
+        return a < b ? a : b;
+    }
+
+    static class Interval {
+        long start;
+        long end;
+        Interval(long s, long e) {
+            start = s;
+            end = e;
+        }
+    }
+}
+
+##cc4
+#include <bits/stdc++.h>
+using namespace std;
+
+#define ull unsigned long long int
+
+bool conditionSort(const pair<ull, ull> &x, const pair<ull, ull> &y)
+{
+  if (x.second == y.second)
+    return (x.first < y.first);
+  else
+    return (x.second > y.second);
+}
+
+int main()
+{
+  ull size, i, j;
+  cin >> size;
+  vector<pair<ull, ull>> vect;
+  ull a[size], b[size];
+  for (i = 0; i < size; i++)
+    cin >> a[i];
+  for (i = 0; i < size; i++)
+    cin >> b[i];
+  for (i = 0; i < size; i++)
+    vect.push_back(make_pair(a[i], b[i]));
+  sort(vect.begin(), vect.end(), conditionSort);
+  for (i = 0; i < size; i++)
+    cout << vect[i].first << " " << vect[i].second << " ";
+}
+#CC5
+/* package codechef; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Codechef
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+	    Scanner sc = new Scanner(System.in);
+        int i,j,n,t,a,r,c,max,min;
+        t = sc.nextInt();
+        int res = Integer.MIN_VALUE;
+        while(t-->0) {
+            r = sc.nextInt();
+            c = sc.nextInt();
+            for(i=0;i<r;i++){
+                max = Integer.MIN_VALUE;
+                min = Integer.MAX_VALUE;
+                for(j=0;j<c;j++) {
+                    a = sc.nextInt();
+                    if(a>max) max = a;
+                    if(a<min) min = a;
+                }
+                res = Math.max(max-min, res);
+            }
+            System.out.println(res);
+        }
+    }
+}
+#cc6
+/* package codechef; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Codechef
+{
+    static boolean checkSorted(int n, String arr) {
+        char[] b = new char[n];
+
+        for(int i=0;i<n;i++)
+            b[i] = arr.charAt(i);
+        Arrays.sort(b, 0, n);
+        int ct = 0;
+        for (int i = 0; i < n; i++)
+            if (arr.charAt(i) != b[i])
+                ct++;
+        if (ct == 0 || ct == 2)
+            return true;
+        else
+            return false;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t,n;
+        String s;
+        t = sc.nextInt();
+        while(t-->0) {
+            n = sc.nextInt();
+            s = sc.next();
+            if (checkSorted(n, s))
+                System.out.println("YES");
+            else
+               System.out.println("NO");
+        }
+    }
+}

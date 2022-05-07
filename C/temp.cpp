@@ -1,51 +1,29 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int maxn = 1e5 + 17;
-int n, d[maxn], p[maxn];
-bool mark[maxn];
+#define ull unsigned long long int
+
+bool conditionSort(const pair<ull, ull> &x, const pair<ull, ull> &y)
+{
+  if (x.second == y.second)
+    return (x.first < y.first);
+  else
+    return (x.second > y.second);
+}
+
 int main()
 {
-  ios::sync_with_stdio(0), cin.tie(0);
-  int t;
-  cin >> t;
-  while (t--)
-  {
-    cin >> n;
-    for (int i = 0; i < n; i++)
-      cin >> p[i], p[i]--;
-    fill(d + 1, d + n, n);
-    memset(mark, 0, sizeof mark);
-    queue<int> q({0});
-    while (q.size())
-    {
-      int i = q.front();
-      q.pop();
-      if (mark[i])
-        continue;
-      mark[i] = 1;
-      vector<int> self({i});
-      while (p[self.back()] != i)
-      {
-        self.push_back(p[self.back()]);
-        d[self.back()] = d[i];
-        mark[self.back()] = 1;
-      }
-      auto add = [&](int j)
-      {
-        if (d[j] <= d[i] + 1)
-          return;
-        d[j] = d[i] + 1;
-        q.push(j);
-      };
-      for (auto i : self)
-      {
-        if (i)
-          add(i - 1);
-        if (i < n - 1)
-          add(i + 1);
-      }
-    }
-    cout << d[n - 1] << '\n';
-  }
+  ull size, i, j;
+  cin >> size;
+  vector<pair<ull, ull>> vect;
+  ull a[size], b[size];
+  for (i = 0; i < size; i++)
+    cin >> a[i];
+  for (i = 0; i < size; i++)
+    cin >> b[i];
+  for (i = 0; i < size; i++)
+    vect.push_back(make_pair(a[i], b[i]));
+  sort(vect.begin(), vect.end(), conditionSort);
+  for (i = 0; i < size; i++)
+    cout << vect[i].first << " " << vect[i].second << " ";
 }

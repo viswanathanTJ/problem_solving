@@ -1,67 +1,26 @@
 class Soln
 {
-    static void solve(String arr)
-    {
-        int curr_max = 0;
-        int last_entry = 0;
-        int j;
-        for (int i = 0; i < arr.length(); i++)
-        {
-            int noOfNextD = 0;
-            switch (arr.charAt(i))
-            {
-                case 'I':
-                    j = i + 1;
-                    while (j < arr.length() && arr.charAt(j) == 'D')
-                    {
-                        noOfNextD++;
-                        j++;
-                    }
-                    if (i == 0)
-                    {
-                        curr_max = noOfNextD + 2;
-                        System.out.print(" " + ++last_entry);
-                        System.out.print(" " + curr_max);
-                        last_entry = curr_max;
-                    }
-                    else
-                    {
-                        curr_max = curr_max + noOfNextD + 1;
-                        last_entry = curr_max;
-                        System.out.print(" " + last_entry);
-                    }
-                    for (int k = 0; k < noOfNextD; k++)
-                    {
-                        System.out.print(" " + --last_entry);
-                        i++;
-                    }
-                    break;
-                case 'D':
-                    if (i == 0)
-                    {
-                        j = i + 1;
-                        while (j < arr.length()&&arr.charAt(j) == 'D')
-                        {
-                            noOfNextD++;
-                            j++;
-                        }
-                        curr_max = noOfNextD + 2;
-                        System.out.print(" " + curr_max + " " + (curr_max - 1));
-                        last_entry = curr_max - 1;
-                    }
-                    else
-                    {
-                        System.out.print(" " + (last_entry - 1));
-                        last_entry--;
-                    }
-                    break;
+    public static void main(String[] args) throws java.lang.Exception {
+        Scanner sc = new Scanner(System.in);
+        int i, j, n, t, a, r, c, max, min;
+        t = sc.nextInt();
+        int res = Integer.MIN_VALUE;
+        while (t-- > 0) {
+            r = sc.nextInt();
+            c = sc.nextInt();
+            for (i = 0; i < r; i++) {
+                max = Integer.MIN_VALUE;
+                min = Integer.MAX_VALUE;
+                for (j = 0; j < c; j++) {
+                    a = sc.nextInt();
+                    if (a > max)
+                        max = a;
+                    if (a < min)
+                        min = a;
+                }
+                res = Math.max(max - min, res);
             }
+            System.out.println(res);
         }
-        System.out.println();
-    }
-    public static void main(String[] args)
-    {
-        solve("IDIDI");
     }
 }
- 
