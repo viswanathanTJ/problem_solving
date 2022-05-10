@@ -1,22 +1,15 @@
-n, r = int(input()), 0
+from itertools import combinations, permutations
+# for c in combinations([i for i in range(1, 10)], k):
+#     print(c)
+print(*permutations([1,2,3,4,5], 3))
+# print(*combinations([1,2,3,4,5], 3))
 
-def splitter(n, s):
-    global r
-    while n >= s:
-        x = n%(s*10)
-        if x!=0 and x % 11 == 0:
-            r += 1
-        n = n//10
+def permute(arr, n, index):
+    for i in range(index, n):
+        arr[i], arr[index] = arr[index], arr[i]
+        permute(arr, n, index + 1)
+        arr[index], arr[i] = arr[i], arr[index]
+    if index == n - 1:
+        print(arr[:n], end=' ')
 
-t = n
-c = 0
-while t > 0:
-    if t!=0 and (t % 10) % 11 == 0:
-        r += 1
-    c += 1
-    t = t//10
-i = 10
-for _ in range(1, c):
-    splitter(n, i)
-    i *= 10
-print(r)
+permute([1,2,3,4,5], 3, 0)

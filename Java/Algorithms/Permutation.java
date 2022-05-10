@@ -25,7 +25,7 @@ public class Permutation{
 		int n = Int();
 		int[] arr = new int[n];
 		for(int i=1; i<=n; i++) arr[i-1] = i;
-		permute(arr, n, 0);
+		permute(arr, 3, 0);
 		for(int x : arr) System.out.print(x+" ");
 	}
 	public static void fill(int[] ar, int n){

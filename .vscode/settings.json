@@ -1,13 +1,15 @@
 {
   "code-runner.executorMap": {
     "python": "cat input.txt | python $fullFileName",
-    "java": "cd $dir && javac $fileName && cat ../input.txt | java $fileNameWithoutExt && cd ..",
-    "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && cat ../input.txt | $dir$fileNameWithoutExt && cd ..",
+    "java": "cd $dir && javac $fileName && cat input.txt | java $fileNameWithoutExt && cd $workspaceRoot",
+    "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && cat input.txt | $dir$fileNameWithoutExt && cd $workspaceRoot",
   },
-  "java.project.sourcePaths": [],
+  "java.project.sourcePaths": [
+    "Java\\Code"
+  ],
   "editor.codeActionsOnSave": {
     "source.organizeImports": true
-},  
+  },
   "files.associations": {
     "stdio.h": "c",
     "random": "c"
