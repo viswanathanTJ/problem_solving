@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -7,9 +8,14 @@ class Main {
         
     }
     public static void main(String[] args) {
-        List<String> stringList = new ArrayList<String>();
-        stringList.add("abc");
-        stringList.add("cba");
-        stringList.add("cba");
+        var stringList = new ArrayList<String>(){
+            {
+                add("abc");
+                add("cba");
+            }
+        };
+        var strings = new ArrayList<>(Arrays.asList("abc","cba"));
+        System.out.println(stringList);
+        System.out.println(strings);
     }
 }

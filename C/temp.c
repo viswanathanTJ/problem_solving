@@ -3,30 +3,24 @@
 #include <limits.h>
 #include <string.h>
 
-char *getSequence(char *str)
-{
-    char *ret = malloc(100);
-    int ind = 0;
-    for (int i = 0; str[i]; i++)
-    {
-        int count = 1;
-        if(str[i]-'0' > 0 && str[i]-'0' < 10) {
-            while (str[i] == str[i + 1])
-            {
-                i++;
-                count++;
-            }
-            ret[ind++] = str[i];
-            ret[ind++] = count+'0';
-        }
-    }
-    ret[ind] = '\0';
-    return ind ? ret : "No string found";
-}
-
 int main()
 {
-    char word[100];
-    scanf("%s", word);
-    printf("%s", getSequence(word));
+    int c, i, j, t, n, a[(int)10e9], b[(int)10e9];
+    scanf("%d", &t);
+    while(t-- > 0) {
+        c = 0;
+        scanf("%d", &n);
+        for(i=0; i<n;i++)
+            scanf("%d", &a[i]);
+        for(i=0; i<n;i++)
+            scanf("%d", &b[i]);
+        for(i=0;i<n;i++)
+            for(j=i+1;j<n;j++)
+                if(a[i] == b[j])
+                    c++;
+                else if(a[j] == b[i])
+                    c++;
+        printf("%d\n", c);
+    }
+    
 }
