@@ -1,25 +1,26 @@
-#include<stdio.h>
-#include<limits.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
 
-int main() {
-    int i,j,n,t,a,r,c,max,min;
-    scanf("%d",&t);
-    int res = INT_MIN;
-    while(t--) {
-        scanf("%d %d", &r, &c);
-        for(i=0;i<r;i++) {
-            max = INT_MIN;
-            min = INT_MAX;
-            for(j=0;j<c;j++) {
-                scanf("%d", &a);
-                if (a > max)
-                    max = a;
-                if (a < min)
-                    min = a;
-            }
-            if(max-min > res)
-                res = max-min;
+char *getSequence(char *str)
+{
+    int i, n = 0, a[10] = {0}, ind = 0;
+    char *ret = malloc(100);
+    for (i = 0; str[i]; i++)
+        a[str[i] - '0']++;
+    for (i = 1; i < 10; i++)
+        if (a[i])
+        {
+            ret[ind++] = i+'0';
+            ret[ind++] = a[i] + '0';
         }
-        printf("%d\n", res);
-    }
+    ret[ind] = '\0';
+    return ret;
+}
+
+int main()
+{
+    char word[100];
+    scanf("%s", word);
+    printf("%s", getSequence(word));
 }

@@ -1,15 +1,22 @@
-from itertools import combinations, permutations
-# for c in combinations([i for i in range(1, 10)], k):
-#     print(c)
-print(*permutations([1,2,3,4,5], 3))
-# print(*combinations([1,2,3,4,5], 3))
+from itertools import combinations_with_replacement
 
-def permute(arr, n, index):
-    for i in range(index, n):
-        arr[i], arr[index] = arr[index], arr[i]
-        permute(arr, n, index + 1)
-        arr[index], arr[i] = arr[i], arr[index]
-    if index == n - 1:
-        print(arr[:n], end=' ')
 
-permute([1,2,3,4,5], 3, 0)
+def printCombination(arr, n, r):
+    data = [0]*r
+    combinationUtil(arr, data, 0, n - 1, 0, r)
+
+def combinationUtil(arr, data, start, end, index, r):
+    if (index == r):
+        print(*data[:r])
+        return
+    i = start 
+    while(i <= end and end - i + 1 >= r - index):
+        data[index] = arr[i]
+        combinationUtil(arr, data, i + 1, end, index + 1, r)
+        i += 1
+
+arr = ['a','e','i','o','u']
+r = 2
+n = len(arr)
+printCombination(arr, n, r)
+# print(*combinations_with_replacement(arr, 2))
