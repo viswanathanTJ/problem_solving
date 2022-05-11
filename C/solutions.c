@@ -4,20 +4,21 @@
 
 void getMissingNumber(int *arr, int len) {
     int i, j;
-
     for(i=0;i<len;i++) 
         for(j=i; j<len; j++)
             if(arr[i] > arr[j])
-                arr[i] = arr[j] + arr[i] - (arr[j] = arr[i]);
-                
+                arr[i] = arr[j] + arr[i] - (arr[j] = arr[i]);   
     int diff = arr[0] - 0;
+    int res[len], ind = 0;
     for (i = 0; i < len; i++)
         if (arr[i] - i != diff)
             while (diff < arr[i] - i)
-            {
-                printf("%d ", i+diff);
-                diff++;
-            }
+                res[ind++] = i+diff++;
+    if(ind)
+        for(i = 0; i<ind;i++)
+            printf("%d ", res[i]);
+    else
+        printf("No string found");
 }
 
 int main() {

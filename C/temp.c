@@ -1,21 +1,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+#include <string.h>
 
 char *getSequence(char *str)
 {
-    int i, n = 0, a[10] = {0}, ind = 0;
     char *ret = malloc(100);
-    for (i = 0; str[i]; i++)
-        a[str[i] - '0']++;
-    for (i = 1; i < 10; i++)
-        if (a[i])
-        {
-            ret[ind++] = i+'0';
-            ret[ind++] = a[i] + '0';
+    int ind = 0;
+    for (int i = 0; str[i]; i++)
+    {
+        int count = 1;
+        if(str[i]-'0' > 0 && str[i]-'0' < 10) {
+            while (str[i] == str[i + 1])
+            {
+                i++;
+                count++;
+            }
+            ret[ind++] = str[i];
+            ret[ind++] = count+'0';
         }
+    }
     ret[ind] = '\0';
-    return ret;
+    return ind ? ret : "No string found";
 }
 
 int main()
