@@ -4,18 +4,12 @@ import java.util.List;
 import java.util.Scanner;
 
 class Main {
-    static void getReverseStrings(List<String> arr) {
-        
-    }
     public static void main(String[] args) {
-        var stringList = new ArrayList<String>(){
-            {
-                add("abc");
-                add("cba");
-            }
-        };
-        var strings = new ArrayList<>(Arrays.asList("abc","cba"));
-        System.out.println(stringList);
-        System.out.println(strings);
+        String s = "Vviswa";
+        System.out.println((int)'z');
+        for(char c: s.toCharArray()) {
+            char in = c>96 ? 'a' : 'A';
+            System.out.println(c-in);
+        }
     }
 }
