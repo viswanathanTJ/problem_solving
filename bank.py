@@ -1,12 +1,13 @@
 users = []
-acc_no = 1001
-
+acc_no = 101
+user_locator = {}
 
 def add_user(name):
-    global acc_no, users
+    global acc_no, users, user_locator
     d = {}
     d['name'] = name
     d['accno'] = acc_no
+    user_locator[acc_no] = len(users)
     acc_no += 1
     d['ifsc'] = 'IFSC01'
     d['amt'] = 500
@@ -15,11 +16,10 @@ def add_user(name):
     print(d)
 
 
-def get_user(accno):
-    global users
-    for user in users:
-        if user['accno'] == accno:
-            return user
+def get_user(acc_no):
+    global users, user_locator
+    if acc_no in user_locator:
+        return users[user_locator[acc_no]]
     return None
 
 
@@ -53,7 +53,9 @@ def deposit(accno, amt):
 def display_all_user():
     global users
     for user in users:
+        [print(key, ':', value) for key, value in user.items()]
         print()
+        # print(user)
 
 bank_open = True
 
@@ -63,6 +65,7 @@ while bank_open:
     2. Get user
     3. Deposit
     4. Withdrawl
+    5. Display all users
     0. Exit
 ''')
     choice = int(input())
@@ -85,6 +88,8 @@ while bank_open:
             accno = int(input('Enter account number: '))
             amt = int(input('Enter amount to withdrawl: '))
             withdraw(accno, amt)
+        case 5:
+            display_all_user()
         case 0:
             bank_open = False
 
