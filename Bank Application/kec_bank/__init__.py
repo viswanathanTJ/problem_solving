@@ -18,10 +18,14 @@ class Bank:
         if mobile in acc_checker:
             print("Unable to add. User already exists in this bank.")
             return
+        if len(str(mobile)) < 5:
+            print("Mobile number should be atleast 5 digits")
+            return
         cur_acc_no = self.account_number
         acc_checker.add(mobile)
         users[cur_acc_no] = UserHandler(name, cur_acc_no, mobile, self.ifsc)
         print("Account created successfully")
+        print("[*] Your account number is", cur_acc_no)
         self.account_number += 1
 
     def get_user(self, acc_no: int) -> UserHandler:
