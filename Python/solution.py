@@ -1,29 +1,53 @@
-from collections import defaultdict
-import heapq
-
-
-def network_delay(times, n, k):
-    adj_list = defaultdict(list)
-        
-    for x,y,w in times:
-        adj_list[x].append((w, y))
+def isgreater(l1, l2):
+    if l1[1] == l2[1]: # cutoff
+        if l1[2] == l1[2]: # age
+            if l1[3] == l1[3]: # hsc
+                if l1[4] > l2[4]: # sslc
+                    return True
     
-    visited=set()
-    heap = [(0, k)]
-    while heap:
-        travel_time, node = heapq.heappop(heap)
-        visited.add(node)
-        
-        if len(visited)==n:
-            return travel_time
-        
-        for time, adjacent_node in adj_list[node]:
-            if adjacent_node not in visited:
-                heapq.heappush(heap, (travel_time+time, adjacent_node))
-            
-    return -1
+    if l1[1] == l2[1]: # cutoff
+        if l1[2] == l1[2]: # age
+            if l1[3] > l2[3]: # hsc
+                return True
 
-times = [[2,1,1],[2,3,1],[3,4,1]]
-n = 4
-k = 2
-print(network_delay(times, k))
+    if l1[1] == l2[1]: # cutoff
+        if l1[2] > l2[2]: # age
+            return True
+
+    if l1[1] > l2[1]: # cutoff
+            return True
+    return False
+    
+
+def findCounselling(no_of_slots, no_of_students, slots, students, date):
+    for i in range(no_of_students):
+        for j in range(i, no_of_students):
+            if not isgreater(students[i], students[j]):
+                students[i], students[j] = students[j], students[i]
+
+    c = 0
+    i = 0
+    for s in slots:
+        if date != s[0]:
+            i += 1
+            c += s[2]-1
+    for i in range(slots[i][2]):
+        print(students[c+i])
+
+slots = []
+no_of_slots = int(input())
+for _ in range(no_of_slots):
+    date = int(input())
+    id = int(input())
+    nos = int(input())
+    slot = [date, id, nos]
+    slots.append(slot)
+
+students = []
+no_of_studs = int(input())
+for _ in range(no_of_studs):
+    students.append([int(input()), int(input()), int(input()), int(input()), int(input())])
+
+date = int(input())
+
+findCounselling(no_of_slots, no_of_studs, slots, students, date)

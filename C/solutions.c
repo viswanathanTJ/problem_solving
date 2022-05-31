@@ -1,18 +1,21 @@
 #include <stdio.h>
 
+char GetCoinState(char state, int n) {
+    if(state == 'H' && n % 2)
+        return 'T';
+    else if(state == 'T' && n % 2)
+        return 'H';
+    else
+        return state;
+}
+
 int main(void)
 {
-    int m, t, a, b, c1, c2;
-    scanf("%d", &t);
-    while (t-- > 0)
-    {
-        scanf("%d %d %d", &m, &a, &b);
-        c1 = a - m;
-        if(c1 < 0) c1 = -c1;
-        c2 = b - a;
-        if(c2 < 0) c2 = -c2;
-        c2 += 1;
-        printf("%d\n", c1 < c2 ? c1 : c2);
-    }
+    int n;
+    char state;
+    state = getchar();
+    scanf("%d", &n);
+    char result = GetCoinState(state, n);
+    printf("%c", result);
     return 0;
 }
