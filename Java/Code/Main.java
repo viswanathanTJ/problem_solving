@@ -1,15 +1,11 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
-
-class Main {
-    public static void main(String[] args) {
-        String s = "Vviswa";
-        System.out.println((int)'z');
-        for(char c: s.toCharArray()) {
-            char in = c>96 ? 'a' : 'A';
-            System.out.println(c-in);
-        }
+interface A{
+    int x=65;
+}
+interface B{
+    int x=66;
+}
+public class Main implements A,B {
+    public static void main(String[] a){
+        System.out.println(B.x); // which x?
     }
 }

@@ -8,10 +8,10 @@ with open('input.txt', 'r') as f:
 p.typewrite(w)
 
 ## Remove extra brackets
-p.keyDown('shiftleft')
-p.keyDown('shiftright')
-p.press(['down']*10)
-p.keyUp('shiftleft')
-p.keyUp('shiftright')
-p.press('delete')
+# p.keyDown('shiftleft')
+# p.keyDown('shiftright')
+# p.press(['down']*10)
+# p.keyUp('shiftleft')
+# p.keyUp('shiftright')
+# p.press('delete')
 print('done')
