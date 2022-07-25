@@ -1,53 +1,20 @@
-def isgreater(l1, l2):
-    if l1[1] == l2[1]: # cutoff
-        if l1[2] == l1[2]: # age
-            if l1[3] == l1[3]: # hsc
-                if l1[4] > l2[4]: # sslc
-                    return True
-    
-    if l1[1] == l2[1]: # cutoff
-        if l1[2] == l1[2]: # age
-            if l1[3] > l2[3]: # hsc
-                return True
+## input and validation
+try:
+    h1, m1, s1 = map(int, input('Enter start time in format HH:MM:SS: ').split(':'))
+    if h1 < 0 or h1 > 23 or m1 < 0 or m1 > 59 or s1 < 0 or s1 > 59:
+        raise ValueError('Invalid start time')
+    h2, m2, s2 = map(int, input('Enter end time in format HH:MM:SS: ').split(':'))
+    if h2 < 0 or h2 > 23 or m2 < 0 or m2 > 59 or s2 < 0 or s2 > 59:
+        raise ValueError('Invalid end time')
+    if h1 > h2 or (h1 == h2 and m1 > m2) or (h1 == h2 and m1 == m2 and s1 > s2):
+        raise ValueError('Start date must be earlier than end date')
+except Exception as e:
+    print(e)
+    exit()
+## calculate difference in times
+if s2 < s1: s2 += 60; m2 -= 1
+if m2 < m1: m2 += 60; h2 -= 1
+ss, mm, hh = s2-s1, m2-m1, h2-h1
 
-    if l1[1] == l2[1]: # cutoff
-        if l1[2] > l2[2]: # age
-            return True
-
-    if l1[1] > l2[1]: # cutoff
-            return True
-    return False
-    
-
-def findCounselling(no_of_slots, no_of_students, slots, students, date):
-    for i in range(no_of_students):
-        for j in range(i, no_of_students):
-            if not isgreater(students[i], students[j]):
-                students[i], students[j] = students[j], students[i]
-
-    c = 0
-    i = 0
-    for s in slots:
-        if date != s[0]:
-            i += 1
-            c += s[2]-1
-    for i in range(slots[i][2]):
-        print(students[c+i])
-
-slots = []
-no_of_slots = int(input())
-for _ in range(no_of_slots):
-    date = int(input())
-    id = int(input())
-    nos = int(input())
-    slot = [date, id, nos]
-    slots.append(slot)
-
-students = []
-no_of_studs = int(input())
-for _ in range(no_of_studs):
-    students.append([int(input()), int(input()), int(input()), int(input()), int(input())])
-
-date = int(input())
-
-findCounselling(no_of_slots, no_of_studs, slots, students, date)
+# printing result
+print(f'Difference between two times is {hh}:{mm}:{ss}')
