@@ -1,21 +1,13 @@
 #include <stdio.h>
 
-char GetCoinState(char state, int n) {
-    if(state == 'H' && n % 2)
-        return 'T';
-    else if(state == 'T' && n % 2)
-        return 'H';
-    else
-        return state;
-}
 
 int main(void)
 {
-    int n;
-    char state;
-    state = getchar();
-    scanf("%d", &n);
-    char result = GetCoinState(state, n);
-    printf("%c", result);
+    printf("Hello World\n");
+    int i;
+    printf("Enter a number: ");
+    scanf("%d", &i);
+    printf("%d", i);
+    scanf("%d", &i);
     return 0;
 }
