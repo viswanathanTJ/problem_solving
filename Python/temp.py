@@ -1,23 +1,150 @@
-def bubblesort(elements):
-    swapped = False
-    c = 0
-    # Looping from size of array from last index[-1] to index [0]
-    for n in range(len(elements)-1, 0, -1):
-        for i in range(n):
-            if elements[i] > elements[i + 1]:
-                swapped = True
-                c += 1
-                elements[i], elements[i + 1] = elements[i + 1], elements[i]       
-        if not swapped:
-            # exiting the function if we didn't make a single swap
-            # meaning that the array is already sorted.
-            return
-    print(c)
- 
-elements = [4,9,8,2,1]
- 
-print("Unsorted list is,")
-print(elements)
-bubblesort(elements)
-print("Sorted Array is, ")
-print(elements)
+main = '<classpathentry exported="true" kind="lib" path="'
+l = '''AcsResources.jar                                    jcaptcha-2.0-alpha-1-jdk5.jar
+AdvAcsApi.jar                                       jedis-3.2.0.jar
+AdvAcsApiWc.jar                                     jna-4.5.2.jar
+AdvAcsCommon.jar                                    jna-platform-4.5.2.jar
+AdvCache.jar                                        jna.jar
+AdvCoreLogging.jar                                  joda-time-2.1.jar
+AdvCustomView.jar                                   joda-time-2.9.9.jar
+AdvI18n.jar                                         json-smart-1.1.1.jar
+AdvMicroFramework.jar                               json.jar
+AdvPNSCommon.jar                                    jsonapi-converter-0.6.jar
+AdvPersistence.jar                                  jstl.jar
+AdvPnsApi.jar                                       jtidy-r938.jar
+AdvTaskEngine.jar                                   jxl.jar
+AdvWmsApi.jar                                       kafka-clients-0.10.0.1.jar
+AdvWmsCommon.jar                                    kafka-log4j-appender-0.10.0.1.jar
+AdvWmsServerCommon.jar                              kafka_2.11-0.10.0.1.jar
+AdventNetIMTables.jar                               log4j-1.2.17.jar
+AdventNetPMTables.jar                               log4j-api-2.17.1.jar
+AdventNetRssLibrary.jar                             log4j-core-2.17.1.jar
+AdventNetSearchAgent.jar                            logagent.jar
+AdventNetTeamPlanner.jar                            lucene-analyzers-common-4.10.4.jar
+AdventNetTeamPlannerClient.jar                      lucene-analyzers-icu-4.10.4.jar
+CrmPlusAgent.jar                                    lucene-core-4.10.4.jar
+DBEncryptAgent.jar                                  lucene-facet-4.10.4.jar
+EDiscovery_Agent.jar                                lucene-highlighter-4.10.4.jar
+EncryptUtil.jar                                     lucene-memory-4.10.4.jar
+FileEncryptAgent.jar                                lucene-queries-4.10.4.jar
+Filters.jar                                         lucene-queryparser-4.10.4.jar
+JstlTlds.jar                                        lucene-spatial-4.10.4.jar
+MimeUtil.jar                                        lz4-1.3.0.jar
+SparseBitSet-1.2.jar                                macro-compat_2.11-1.1.1.jar
+SwisSQLAPI.jar                                      mail.jar
+Transmail_api_client_java.jar                       maverick-legacy-client-1.7.32-all.jar
+ZPCommonModule.jar                                  metrics-core-2.2.0.jar
+ZPRestAPI.jar                                       mpxj.jar
+ZPRestAPIController.jar                             mqclient.jar
+ZohoAnalyticsAPIClient.jar                          msgpack-0.6.7.jar
+ZohoEditor.jar                                      mysql-connector-java-5.1.49.jar
+ZohoEditor_Jsp.jar                                  native
+ZohoProjects.jar                                    nekohtml.jar
+ZohoProjectsAPI.jar                                 netty-all-4.1.63.Final.jar
+accounts-api-oncloud.jar                            netty-buffer-4.1.63.Final.jar
+accounts-api.jar                                    netty-codec-4.1.63.Final.jar
+accounts-proto.jar                                  netty-codec-http-4.1.63.Final.jar
+agent-extension.jar                                 netty-common-4.1.63.Final.jar
+aircompressor-0.16.jar                              netty-handler-4.1.63.Final.jar
+antisamy-1.6.4.jar                                  netty-resolver-4.1.63.Final.jar
+antlr-runtime-4.5.1.jar                             netty-tcnative-boringssl-static-2.0.44.Final.jar
+aspose-cells-17.1.0.jar                             netty-transport-4.1.63.Final.jar
+attackdiscovery.jar                                 nimbus-jose-jwt-5.7.jar
+bcpkix-jdk15on-1.64.jar                             ognl-3.0.21.jar
+bcprov-jdk15on-1.60.jar                             okhttp-3.9.0.jar
+bcprov-jdk15on-1.64.jar                             okio-1.13.0.jar
+certman.jar                                         org.eclipse.wst.xml.xpath2.processor_1.2.0.jar
+commons-beanutils-1.9.4.jar                         oro-2.0.8.jar
+commons-beanutils.jar                               pdfbox-app-2.0.24.jar
+commons-codec-1.11.jar                              perfmark-api-0.24.0.jar
+commons-codec-1.15.jar                              play-functional_2.11-2.6.6.jar
+commons-collections-3.2.2.jar                       play-json_2.11-2.6.6.jar
+commons-collections.jar                             poi-5.0.0.jar
+commons-collections4-4.1.jar                        poi-ooxml-5.0.0.jar
+commons-collections4-4.4.jar                        poi-ooxml-full-5.0.0.jar
+commons-compress-1.20.jar                           postgresql-42.2.23.jar
+commons-compress-1.21.jar                           protobuf-java-3.18.0.jar
+commons-csv-1.3.jar                                 protostuff-api-1.7.4.jar
+commons-csv-1.8.jar                                 protostuff-collectionschema-1.7.4.jar
+commons-digester.jar                                protostuff-core-1.7.4.jar
+commons-fileupload-1.4.jar                          protostuff-runtime-1.7.4.jar
+commons-httpclient-3.1.jar                          resource-api.jar
+commons-imaging-1.0-alpha1.jar                      resource-proto.jar
+commons-io-2.2.jar                                  resource-servlet-oncloud.jar
+commons-io-2.3.jar                                  resource-servlet.jar
+commons-lang-2.4.jar                                retrofit-2.0.2.jar
+commons-lang3-3.3.2.jar                             rtfparserkit-1.10.0.jar
+commons-lang3-3.9.jar                               run.jar
+commons-logging-1.0.4.jar                           sas-grpc-api.jar
+commons-logging-1.2.jar                             sas.jar
+commons-math3-3.6.1.jar                             scala-library-2.11.8.jar
+commons-pool-1.5.6.jar                              scala-parser-combinators_2.11-1.0.4.jar
+commons-pool2-2.0.jar                               scala-reflect-2.11.7.jar
+commons-pool2-2.2.jar                               scala-stm_2.11-0.11.1.jar
+commons-text-1.8.jar                                scalachromeheadless_2.11-1.2_2.13-Beta-SNAPSHOT.jar
+commons-validator-1.7.jar                           slf4j-api-1.6.1.jar
+conf.jar                                            slf4j-api-1.7.21.jar
+cssparser-0.9.27.jar                                slf4j-api-1.7.30.jar
+cupv10k-runtime.jar                                 slf4j-log4j12-1.7.21.jar
+dbcp.jar                                            slf4j-simple-1.6.1.jar
+dd2proto-util.jar                                   slf4j-simple-1.7.29.jar
+dnsjava-2.0.6.jar                                   snakeyaml-1.11.jar
+dom4j-1.6.1.jar                                     snakeyaml-1.29.jar
+dwr.jar                                             snappy-java-1.1.2.6.jar
+eddsa-0.3.0.jar                                     spatial4j-0.4.1.jar
+esapi-2.1.0.1.jar                                   spotbugs-annotations-3.1.12.jar
+failureaccess-1.0.1.jar                             standard.jar
+fluent-hc-4.5.10.jar                                stax-api-1.0.1.jar
+framework-tools.jar                                 storehandler.jar
+freemarker-2.3.28.jar                               struts.jar
+grpc-api-1.41.0.jar                                 struts2-core-2.3.35.jar
+grpc-context-1.41.0.jar                             tarantool-pool.jar
+grpc-core-1.41.0.jar                                tika-core.jar
+grpc-lifecycle.jar                                  tokyocabinet.jar
+grpc-netty-1.41.0.jar                               ua-parser.jar
+grpc-protobuf-1.41.0.jar                            uuid-3.2.0.jar
+grpc-protobuf-lite-1.41.0.jar                       wafad.jar
+grpc-stub-1.41.0.jar                                wd-commons-codec-1.13.jar
+gson-2.2.4.jar                                      websocket-scala-client_2.11-0.4.0.jar
+guava-31.0.1-jre.jar                                xercesImpl.jar
+h2-1.4.199.jar                                      xml-apis-ext.jar
+hadoop-0.13.0-core.jar                              xml-apis.jar
+handlebars-4.0.6.jar                                xmlbeans-4.0.0.jar
+httpclient-4.5.10.jar                               xwork-core-2.3.35.jar
+httpclient-4.5.13.jar                               xz-1.9.jar
+httpclient-cache-4.5.10.jar                         yuicompressor-2.4.2.jar
+httpclient-osgi-4.5.10.jar                          yuicompressor.jar
+httpclient-win-4.5.10.jar                           za-guava-20.0.jar
+httpcore-4.4.12.jar                                 za-jedis-3.2.0.jar
+httpcore-4.4.14.jar                                 za-protobuf-java-3.10.0.jar
+httpmime-4.5.10.jar                                 za-protobuf-java-format.jar
+iamstream.jar                                       zapps_client.jar
+ical4j-3.0.17.jar                                   zfs-api.jar
+icu4j-55_1.jar                                      zfsng-api.jar
+jackson-annotations-2.9.8.jar                       zfsngprotobuf.jar
+jackson-core-2.9.8.jar                              zip4j_1.3.2.jar
+jackson-databind-2.9.8.jar                          zkclient-0.8.jar
+jackson-datatype-jdk8-2.8.9.jar                     zoho-security.jar
+jackson-datatype-jsr310-2.8.9.jar                   zookeeper-3.4.6.jar
+jakarta.activation.jar                              zr-csv.jar
+java-ipv6-0.16.jar                                  zs-dsaccesscontrol.jar
+java_memcached-release_2.6.6.jar                    zs-urlvalidator.jar
+javacsv.jar                                         zsec-eventfw.jar
+javassist-3.11.0.GA.jar                             zsec-eventpojos.jar
+javassist-3.18.2-GA.jar                             zsec-jedis-3.2.0.jar
+jbcrypt.jar                                         zsecagent.jar
+jboss-common-jdbc-wrapper.jar                       zsecappfirewall.jar
+jboss-j2ee.jar                                      zsecpiidetector.jar
+jboss-transaction.jar                               zteamdrive_client.jar'''.split()
+
+m = []
+s = '/Users/viswa-pt5764/Downloads/Eclipse.app/Contents/MacOS/ZIDE/deployment/viswa_issuefix/AdventNet/Sas/tomcat/webapps/viswa_issuefix/WEB-INF/lib/'
+for jar in l:
+    m.append(main+s+jar+'"/>\n        ')
+    # print(main+s+jar+'" />\n      ')
+    # break
+# s = ''
+# for jar in l:
+#     s += main + jar + '"/>\n'
+
+with open('res.txt', 'w') as f:
+    f.writelines(m)
