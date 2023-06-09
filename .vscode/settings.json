@@ -6,6 +6,7 @@
   },
   "files.exclude": {
     "**/*.exe": true,
+    "Placement": true,
   },
   "java.project.sourcePaths": [],
   "editor.codeActionsOnSave": {
