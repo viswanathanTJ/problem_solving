@@ -1,0 +1,25 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Solution",
+            "request": "launch",
+            "mainClass": "Solution",
+            "projectName": "problem_solving_52eb1eac"
+        },
+        {
+            "type": "java",
+            "name": "Soln",
+            "request": "launch",
+            "mainClass": "Soln",
+            "projectName": "problem_solving_52eb1eac"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "problem_solving_52eb1eac"
+        }
+    ]
+}
