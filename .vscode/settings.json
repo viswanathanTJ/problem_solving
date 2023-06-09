@@ -8,7 +8,9 @@
     "**/*.exe": true,
     "Placement": true,
   },
-  "java.project.sourcePaths": [],
+  "java.project.sourcePaths": [
+    "Java/Code"
+  ],
   "editor.codeActionsOnSave": {
     "source.organizeImports": true
   },
