@@ -4,27 +4,43 @@ from icecream import ic
 import sys
 import os
 
-
 class Solution:
-    def two_sums(nums, target):
-        value_ind = {}
-        for i in range(len(nums)):
-            value = target - nums[i]
-            if value in value_ind:
-                return [i, value_ind[value]]
-            value_ind[nums[i]] = i
+    def group_anagrams(strs):
+        from collections import defaultdict
+        primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101]
+        mod = 10000000009
+        m = defaultdict(list)
+        key = 0
+        for s in strs:
+            key = 1
+            for c in s:
+                key *= primes[ord(c)-97] + mod
+            m[key].append(s)
+        return list(m.values())
 
+    def matrix_solver(matrix):
+        n = len(matrix)
+        n1 = len(matrix[0])
+        row = [0] * n
+        col = [0] * n1
+        for i in range(0, n):
+            for j in range(0, n1):
+                if not matrix[i][j]:
+                    row[i] = 1
+                    col[j] = 1
 
-
+        for i in range(0, n):
+            for j in range(0, n1):
+                if row[i] or col[j]:
+                    matrix[i][j] = 1
+                
+                
 ## execution codes
-
-solution = Solution()
 
 with open('input.txt', 'r') as f:
     while True:
         l1 = f.readline().strip()
         if not l1: break
-        l = list(map(int, l1.split(',')))
-        t = int(f.readline().strip())
-        res = Solution.two_sums(l, t)
+        strs = eval(l1)
+        res = Solution.matrix_solver(strs)
         print(res)
