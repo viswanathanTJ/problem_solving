@@ -1,4 +1,6 @@
-*.class
-*.exe
-__pycache__
-Scripts
+**/.class
+**/.exe
+**/__pycache__
+**/.DS_STORE
+**/sys.txt
+**/output.txt

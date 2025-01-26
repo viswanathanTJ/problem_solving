@@ -1,7 +1,7 @@
 {
   "code-runner.executorMap": {
-    "python": "cat input.txt | python $fullFileName",
-    "java": "cd $dir && javac $fileName && cat $workspaceRoot/input.txt | java $fileNameWithoutExt && cd $workspaceRoot",
+    "python": "/usr/bin/time -o sys.txt timeout 5 python3 $fullFileName < input.txt > output.txt",
+    "java": "cd $dir && javac $fileName -d $workspaceRoot && /usr/bin/time -o sys.txt timeout 5 java $fileNameWithoutExt < $workspaceRoot/input.txt > output.txt && rm -rf *.class && cd $workspaceRoot",
     "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && cat $workspaceRoot/input.txt | $dir$fileNameWithoutExt && cd $workspaceRoot",
   },
   "files.exclude": {
@@ -12,7 +12,7 @@
     "Java/Code"
   ],
   "editor.codeActionsOnSave": {
-    "source.organizeImports": true
+    "source.organizeImports": "explicit"
   },
   "python.testing.unittestArgs": [
     "-v",

@@ -1,0 +1,14 @@
+[
+    {
+        "key": "ctrl+cmd+r",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Run Java",
+        "when": "resourceExtname == .java"
+    },
+    {
+        "key": "ctrl+cmd+r",
+        "command": "workbench.action.tasks.runTask",
+        "args": "Run Python",
+        "when": "resourceExtname == .py"
+    }
+] 
