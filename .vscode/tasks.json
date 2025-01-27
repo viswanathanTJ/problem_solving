@@ -17,52 +17,11 @@
             },
             "linux": {
                 "cwd": "${workspaceRoot}",
-                "command": "/usr/bin/time",
-                "args": [
-                    "-v",
-                    "-o",
-                    "sys.txt",
-                    "bash",
-                    "-c",
-                    "timeout",
-                    "5",
-                    "javac",
-                    "${fileBasename}",
-                    "&&",
-                    "java",
-                    "${fileBasenameNoExtension}",
-                    "<",
-                    "${workspaceRoot}/input.txt",
-                    ">",
-                    "${workspaceRoot}/output.txt",
-                    "&&",
-                    "rm",
-                    "-f",
-                    "${fileDirname}/*.class"
-                ]
+                "command": "cd ${fileDirname} && /usr/bin/time -o sys.txt && timeout 5 javac ${fileBasename} && java ${fileBasenameNoExtension} < ${workspaceFolder}/input.txt > ${workspaceFolder}/output.txt && rm -rf ${fileDirname}/*class",
             },
             "osx": {
                 "cwd": "${workspaceRoot}",
-                "command": "/usr/bin/time",
-                "args": [
-                    "-o",
-                    "sys.txt",
-                    "timeout",
-                    "5",
-                    "javac",
-                    "${fileBasename}",
-                    "&&",
-                    "java",
-                    "${fileBasenameNoExtension}",
-                    "<",
-                    "${workspaceRoot}/input.txt",
-                    ">",
-                    "${workspaceRoot}/output.txt",
-                    "&&",
-                    "rm",
-                    "-rf",
-                    "${fileDirname}/*.class"
-                ]
+                "command": "cd ${fileDirname} && /usr/bin/time -o sys.txt && timeout 5 javac ${fileBasename} && java ${fileBasenameNoExtension} < ${workspaceFolder}/input.txt > ${workspaceFolder}/output.txt && rm -rf ${fileDirname}/*class",
             },
             "presentation": {
                 "reveal": "silent"
