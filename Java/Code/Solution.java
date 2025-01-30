@@ -4,29 +4,28 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Solution {
-    public static List<List<Integer>> generate(int numRows) {
-        if (numRows == 0) {
-            return new ArrayList<>();
-        }
-        List<List<Integer>> result = new ArrayList<>(Arrays.asList(Arrays.asList(1)));
-        for (int i = 1; i < numRows; i++) {
-            List<Integer> row = new ArrayList<>();
-            List<Integer> prevRow = result.get(i-1);
-            row.add(1);
-            for (int j = 1; j < i; j++) 
-                row.add(prevRow.get(j-1)+prevRow.get(j));
-            row.add(1);
 
-            result.add(row);
+    public static int kadane(int nums[]) throws Exception {
+        int max = nums[0], sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (sum < 0) sum = 0;
+            sum = sum + nums[i];
+            if (sum > max) max = sum;
         }
-        return result;
+        return max;
     }
 
     public static void main(String args[]) throws Exception {
         Scanner sn = new Scanner(System.in);
         int testCase = sn.nextInt();
         sn.nextLine(); // consume leftover newline
-        System.out.println(generate(testCase));
+        // System.out.println(factorial(6));
+        int[] inp = new int[]{-2,1,-3,4,-1,2,1,-5,4};
+        // kadane(inp);
+        int[] inp1 = new int[]{-2, 1};
+        System.out.println(kadane(inp1));
+
+
         sn.close();
     }
 }
