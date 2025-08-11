@@ -6,7 +6,7 @@
   },
   "java.project.sourcePaths": [],
   "editor.codeActionsOnSave": {
-    "source.organizeImports": true
+    "source.organizeImports": "explicit"
   },
   "C_Cpp.errorSquiggles": "Disabled"
 }
