@@ -1,48 +1,41 @@
+from typing import List
+
 class Solution:
-    def merge(self, intervals):
-        n = len(intervals)
-        res = []
-        intervals.sort()
+    def findDuplicate(self, nums: List[int]) -> int:
+        slow_pointer = nums[0]
+        fast_pointer = nums[0]
         
-        for i in range(n):
-            if not res or res[-1][1] < intervals[i][0]:
-                res.append(intervals[i])
-            else:
-                res[-1] = [res[-1][0], max(intervals[i][1], res[-1][-1])]
-        return res
-            
+        while True:
+            slow_pointer = nums[slow_pointer]
+            fast_pointer = nums[nums[fast_pointer]]
+            if fast_pointer == slow_pointer:
+                break
+
+        fast_pointer = nums[0]
         
-    def merge1(self, intervals):
-        res = []
-        n = len(intervals)
-        intervals.sort()
+        while fast_pointer != slow_pointer:
+            slow_pointer = nums[slow_pointer]
+            fast_pointer = nums[fast_pointer]
 
-        for i in range(n):
-            start, end = intervals[i]
-
-            if res and res[-1][1] >= end:
-                continue
-            
-            for j in range(i+1, n):
-                if end >= intervals[j][0]:
-                    end = max(end, intervals[j][1])
-                else:
-                    break
-            
-            res.append([start, end])
-            
-        return res
-
+        return fast_pointer
+        
+    def findDuplicateNoob(self, nums: List[int]) -> int:
+        s = set()
+        for n in nums:
+            if n in s:
+                return n
+            s.add(n)
+        return -1
     
 
 import ast
  
 l = ast.literal_eval(input())
-res = Solution().merge(l)
+res = Solution().findDuplicate(l)
 print(res)
 l = ast.literal_eval(input())
-res = Solution().merge(l)
+res = Solution().findDuplicate(l)
 print(res)
 l = ast.literal_eval(input())
-res = Solution().merge(l)
+res = Solution().findDuplicate(l)
 print(res)
