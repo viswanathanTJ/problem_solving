@@ -1,34 +1,21 @@
 from typing import List
+import ast
 
 class Solution:
-    def searchMatrix(self, matrix, target):
-        n = len(matrix)
-        m = len(matrix[0])
+    # n / 2 times
+    def majorityElement(self, nums: List[int]) -> List[int]:
+        el, cnt = 0, 0
 
-        left = 0
-        right = (n * m) - 1
-        while left <= right:
-            mid = left + (right - left) // 2
-            row_ind = mid // m
-            col_ind = mid % m
-
-            num = matrix[row_ind][col_ind]
-
-            if num == target: return True
-
-            if num > target:
-                right = mid - 1
+        for n in nums:
+            if not cnt:
+                el = n
+                cnt = 1
+            elif el == n:
+                cnt += 1
             else:
-                left = mid + 1
-                
-        return False
+                cnt -= 1
+            
+        return el
 
-
-import ast
- 
-for _ in range(4):
-    nums1 = ast.literal_eval(input())
-    target = int(input())
-    print(nums1, target)
-    res = Solution().searchMatrix(nums1, target)
-    print(res)
+res = Solution().majorityElement(ast.literal_eval(input()))
+print(res)

@@ -1,6 +1,6 @@
 {
   "code-runner.executorMap": {
-    "python": "cat input.txt | python $fullFileName",
+    "python": "cat input.txt | uv run $fullFileName",
     "java": "cd $dir && javac $fileName && cat $workspaceRoot/input.txt | java $fileNameWithoutExt && cd $workspaceRoot",
     "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && cat $workspaceRoot/input.txt | $dir$fileNameWithoutExt && cd $workspaceRoot",
   },
@@ -8,5 +8,4 @@
   "editor.codeActionsOnSave": {
     "source.organizeImports": "explicit"
   },
-  "C_Cpp.errorSquiggles": "Disabled"
 }
