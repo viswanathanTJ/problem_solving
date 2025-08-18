@@ -1,5 +1,5 @@
-**/.class
-**/.exe
+**/*.class
+**/*.exe
 **/__pycache__
 **/.DS_STORE
 **/sys.txt
