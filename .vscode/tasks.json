@@ -1,32 +1,115 @@
 {
+    "version": "2.0.0",
     "tasks": [
         {
+            "label": "Compile and run Java",
             "type": "shell",
-            "label": "g++.exe build active file",
-            "command": "C:\\Apps\\MinGW64\\bin\\g++.exe",
-            "args": [
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
-            ],
-            "options": {
-                "cwd": "C:\\Apps\\MinGW64\\bin"
+            "windows": {
+                "cwd": "${workspaceRoot}",
+                "command": "java",
+                "args": [
+                    "${relativeFile}",
+                    "<",
+                    "input.txt",
+                    ">",
+                    "output.txt"
+                ]
+            },
+            "linux": {
+                "cwd": "${workspaceRoot}",
+                "command": "cd ${fileDirname} && /usr/bin/time -o sys.txt && timeout 5 javac ${fileBasename} && java ${fileBasenameNoExtension} < ${workspaceFolder}/input.txt > ${workspaceFolder}/output.txt && rm -rf ${fileDirname}/*class && rm -rf *class",
+            },
+            "osx": {
+                "cwd": "${workspaceRoot}",
+                "command": "cd ${fileDirname} && /usr/bin/time -o sys.txt && timeout 5 javac ${fileBasename} && java ${fileBasenameNoExtension} < ${workspaceFolder}/input.txt > ${workspaceFolder}/output.txt && rm -rf ${fileDirname}/*class",
+            },
+            "presentation": {
+                "reveal": "silent"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": {
+                "owner": "java",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceRoot}"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
             }
         },
         {
+            "label": "Run Python",
             "type": "shell",
-            "label": "g++ build & run active file",
-            "command": "C:\\Apps\\MinGW64\\bin\\g++.exe",
-            "args": [
-                "${file}",
-                "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
-            ],
-            "options": {
-                "cwd": "C:\\Apps\\MinGW64\\bin"
+            "windows": {
+                "command": "python3",
+                "args": [
+                    "${relativeFile}",
+                    "<",
+                    "input.txt",
+                    ">",
+                    "output.txt"
+                ]
+            },
+            "linux": {
+                "command": "/usr/bin/time",
+                "args": [
+                    "-v",
+                    "-o",
+                    "sys.txt",
+                    "timeout",
+                    "5",
+                    "python3",
+                    "${relativeFile}",
+                    "<",
+                    "input.txt",
+                    ">",
+                    "output.txt"
+                ]
+            },
+            "osx": {
+                "command": "/usr/bin/time",
+                "args": [
+                    "-o",
+                    "sys.txt",
+                    "python3",
+                    "${relativeFile}",
+                    "<",
+                    "input.txt",
+                    ">",
+                    "output.txt"
+                ]
+            },
+            "presentation": {
+                "reveal": "silent"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": {
+                "owner": "py",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceRoot}"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
             }
         }
-    ],
-    "version": "2.0.0"
+    ]
 }
