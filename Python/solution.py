@@ -2,19 +2,15 @@ from typing import List
 import ast
 
 class Solution:
-    def rearrangeArray(self, nums: List[int]) -> int:
-        res = [0] * len(nums)
-        pind, nind = 0, 1
-        for i in range(len(nums)):
-            if nums[i] < 0:
-                res[nind] = nums[i]
-                nind += 2
+    def maxProfit(self, prices: List[int]) -> int:
+        low, profit = float('inf'), 0
+        for p in prices:
+            if p < low: 
+                low = p
             else:
-                res[pind] = nums[i]
-                pind += 2
-        
-        return res
+                profit = max(profit, p - low)
+        return profit if profit > 0 else 0
 
 
-res = Solution().rearrangeArray(ast.literal_eval(input()))
+res = Solution().maxProfit(ast.literal_eval(input()))
 print(res)
