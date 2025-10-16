@@ -1,21 +1,12 @@
 from typing import List
 import ast
+from collections import defaultdict, Counter
 
 class Solution:
-    def removeElement(self, nums: List[int], val: int) -> int:
-        last_ind = len(nums) -1
-        res = last_ind + 1
-        for i in range(len(nums) - 1, -1, -1):
-            if nums[i] == val:
-                nums[i] = nums[last_ind]
-                nums[last_ind] = -1
-                last_ind -= 1
-                res -= 1
-        return res
-
-        
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        # return [x[0] for x in sorted(Counter(nums).items(), key=lambda item: item[1], reverse=True)[:k]]
+        return [x[0] for x in Counter(nums).most_common(k)]
 
 inp = ast.literal_eval(input())
-res = Solution().removeElement(inp, int(input()))
-print(inp)
+res = Solution().topKFrequent(inp, int(input()))
 print(res)
