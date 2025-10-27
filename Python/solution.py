@@ -3,10 +3,26 @@ import ast
 from collections import defaultdict, Counter
 
 class Solution:
-    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        # return [x[0] for x in sorted(Counter(nums).items(), key=lambda item: item[1], reverse=True)[:k]]
-        return [x[0] for x in Counter(nums).most_common(k)]
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+        pre = []
+        suf = [0] * n
+
+        for i in range(n):
+            if not pre:
+                pre.append(nums[i])
+                suf[-1] = nums[n - 1 - i]
+            else:
+                pre.append(pre[-1] * nums[i])
+                suf[n - 1 - i] = suf[n - i] * nums[n - 1 - i]
+            
+        out = [0] * n
+        out[0] = suf[1]
+        for i in range(1, n - 1):
+            out[i] = pre[i - 1] * suf[i + 1]
+        out[-1] = pre[n - 2]
+        return out
 
 inp = ast.literal_eval(input())
-res = Solution().topKFrequent(inp, int(input()))
+res = Solution().productExceptSelf(inp)
 print(res)
