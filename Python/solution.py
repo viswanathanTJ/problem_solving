@@ -3,26 +3,44 @@ import ast
 from collections import defaultdict, Counter
 
 class Solution:
-    def productExceptSelf(self, nums: List[int]) -> List[int]:
-        n = len(nums)
-        pre = []
-        suf = [0] * n
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        n = len(board)
+        for i in range(n):
+            for j in range(n):
+                print(board[i][j], end=',')
+            print()
+
+        def is_valid_num(num, i, j):
+            # check row
+            for x in range(n):
+                if x != j and board[i][x] == num:
+                    return False
+
+            # check col
+            for x in range(n):
+                if x != i and board[x][j] == num:
+                    return False
+
+            # check box
+            row_start = (i // 3) * 3
+            col_start = (j // 3) * 3
+            for r in range(row_start, row_start + 3):
+                for c in range(col_start, col_start + 3):
+                    if (r, c) != (i, j) and num == board[r][c]:
+                        return False
+
+            return True 
 
         for i in range(n):
-            if not pre:
-                pre.append(nums[i])
-                suf[-1] = nums[n - 1 - i]
-            else:
-                pre.append(pre[-1] * nums[i])
-                suf[n - 1 - i] = suf[n - i] * nums[n - 1 - i]
-            
-        out = [0] * n
-        out[0] = suf[1]
-        for i in range(1, n - 1):
-            out[i] = pre[i - 1] * suf[i + 1]
-        out[-1] = pre[n - 2]
-        return out
+            for j in range(n):
+                num = board[i][j]
+                if num != '.':
+                    is_valid = is_valid_num(num, i, j)
+                    if not is_valid:
+                        return False
+
+        return True
 
 inp = ast.literal_eval(input())
-res = Solution().productExceptSelf(inp)
+res = Solution().isValidSudoku(inp)
 print(res)
