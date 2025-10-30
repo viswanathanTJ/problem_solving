@@ -5,27 +5,33 @@ from collections import defaultdict, Counter
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
         n = len(nums)
-        triplets = set()
-        
-        num_ind = {}
+        nums.sort()
+        res = []
 
-        for i in range(n):
-            num_ind[nums[i]] = i
+        for i in range(n - 2):
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue
 
-        for i in range(n):
-            for j in range(i, n):
-                num = nums[i]
-                third_num = nums[j] + nums[i]
-                third_num *= -1
-                if third_num in num_ind:
-                    k = num_ind[third_num]
-                    if (i != j and i != k and j != k):
-                        triplet = tuple(sorted([num, third_num, nums[j]]))
-                        if triplet not in triplets:
-                            triplets.add(triplet)
-        
-        return [list(x) for x in triplets] 
-
+            l = i + 1
+            h = n - 1
+            num = nums[i]
+            while l < h:
+                s = num + nums[l] + nums[h]
+                if s == 0:
+                    triplet = [num, nums[l], nums[h]]
+                    res.append(triplet)
+                    while l < h and nums[l] == nums[l+1]:
+                        l += 1
+                    while l < h and nums[h] == nums[h-1]:
+                        h -= 1
+                    l += 1
+                    h -= 1
+                elif s > 0:
+                    h -= 1
+                else:
+                    l += 1
+                
+        return res
 
 
 
