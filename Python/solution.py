@@ -3,31 +3,23 @@ import ast
 from collections import defaultdict, Counter
 
 class Solution:
-
-    def isValidSudoku(self, board: List[List[str]]) -> bool:
-        n = len(board)
-        rows = [[0] * 9 for _ in range(9)]
-        cols = [[0] * 9 for _ in range(9)]
-        grid = [[0] * 9 for _ in range(9)]
+    def longestConsecutive(self, nums: List[int]) -> int:
+        s = set(nums)
+        print(len(s))
+        res = 0
+        for n in s:
+            if n - 1 not in s:
+                length = 1
+                n += 1
+                while n in s:
+                    length += 1
+                    n += 1
+                res = max(res, length)
         
-        for i in range(n):
-            for j in range(n):
-                num = board[i][j]
-
-                if num != '.':
-                    ind = ord(num) - ord('1')
-                    grid_ind = (i//3) * 3 + (j // 3)
-
-                    if rows[i][ind] or cols[j][ind] or grid[grid_ind][ind]:
-                        return False
-
-                    rows[i][ind] = 1
-                    cols[j][ind] = 1
-                    grid[grid_ind][ind] = 1
-                
-        return True
-
+        return res
+         
+        
 # for _ in range(3):
 inp = ast.literal_eval(input())
-res = Solution().isValidSudoku(inp)
+res = Solution().longestConsecutive(inp)
 print(res)
