@@ -1,30 +1,12 @@
+from typing import List
 import unittest
 import time
 import os
 import ast
 
-def is_palindrome(s: str) -> bool:
-    if not s: return True
-    sp = 0
-    ep = len(s) - 1
-    while sp < ep:
-        if not s[sp].isalnum():
-            sp += 1
-            continue
-        if not s[ep].isalnum():
-            ep -= 1
-            continue
-        if s[sp].lower() == s[ep].lower():
-            sp += 1
-            ep -= 1
-            continue
-        else:
-            return False
-    return True
+def twoSum(self, numbers: List[int], target: int) -> List[int]:
+    return
 
-__import__('atexit').register(lambda: open('display_runtime.txt','w').write('0')) 
-
-        
 
 class TestPalindrome(unittest.TestCase):
     def setUp(self):
