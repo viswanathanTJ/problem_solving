@@ -5,7 +5,6 @@ from collections import defaultdict, Counter
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
         s = set(nums)
-        print(len(s))
         res = 0
         for n in s:
             if n - 1 not in s:
@@ -15,7 +14,7 @@ class Solution:
                     length += 1
                     n += 1
                 res = max(res, length)
-        
+                
         return res
          
         
