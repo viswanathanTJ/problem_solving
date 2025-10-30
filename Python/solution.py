@@ -4,14 +4,18 @@ from collections import defaultdict, Counter
 
 class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
-        num_ind = {}
-        for i in range(len(numbers)):
-            num_ind[numbers[i]] = i + 1
+        left = 0
+        right = len(numbers) - 1
         
-        for i in range(len(numbers)):
-            if target - numbers[i] in num_ind:
-                return [i+1, num_ind[target - numbers[i]]]
-            
+        while left < right:
+            res = numbers[left] + numbers[right]
+            if res == target:
+                return [left + 1, right + 1]
+            if res > target:
+                right -= 1
+            else:
+                left += 1
+                
         
 # for _ in range(3):
 inp = ast.literal_eval(input())
