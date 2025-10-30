@@ -3,22 +3,37 @@ import ast
 from collections import defaultdict, Counter
 
 class Solution:
-    def longestConsecutive(self, nums: List[int]) -> int:
-        s = set(nums)
-        res = 0
-        for n in s:
-            if n - 1 not in s:
-                length = 1
-                n += 1
-                while n in s:
-                    length += 1
-                    n += 1
-                res = max(res, length)
-                
-        return res
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        n = len(nums)
+        triplets = set()
+        
+        num_ind = {}
+
+        for i in range(n):
+            num_ind[nums[i]] = i
+
+        for i in range(n):
+            for j in range(i, n):
+                num = nums[i]
+                third_num = nums[j] + nums[i]
+                third_num *= -1
+                if third_num in num_ind:
+                    k = num_ind[third_num]
+                    if (i != j and i != k and j != k):
+                        triplet = tuple(sorted([num, third_num, nums[j]]))
+                        if triplet not in triplets:
+                            triplets.add(triplet)
+        
+        return [list(x) for x in triplets] 
+
+
+
+
+
+        pass
          
         
 # for _ in range(3):
 inp = ast.literal_eval(input())
-res = Solution().longestConsecutive(inp)
+res = Solution().threeSum(inp)
 print(res)
