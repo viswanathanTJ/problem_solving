@@ -3,22 +3,43 @@ import ast
 from collections import defaultdict, Counter
 
 class Solution:
-    def twoSum(self, numbers: List[int], target: int) -> List[int]:
-        left = 0
-        right = len(numbers) - 1
-        
-        while left < right:
-            res = numbers[left] + numbers[right]
-            if res == target:
-                return [left + 1, right + 1]
-            if res > target:
-                right -= 1
-            else:
-                left += 1
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        n = len(nums)
+        nums.sort()
+        res = []
+
+        for i in range(n - 2):
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue
+
+            l = i + 1
+            h = n - 1
+            num = nums[i]
+            while l < h:
+                s = num + nums[l] + nums[h]
+                if s == 0:
+                    triplet = [num, nums[l], nums[h]]
+                    res.append(triplet)
+                    while l < h and nums[l] == nums[l+1]:
+                        l += 1
+                    while l < h and nums[h] == nums[h-1]:
+                        h -= 1
+                    l += 1
+                    h -= 1
+                elif s > 0:
+                    h -= 1
+                else:
+                    l += 1
                 
+        return res
+
+
+
+
+        pass
+         
         
 # for _ in range(3):
 inp = ast.literal_eval(input())
-target = int(input())
-res = Solution().twoSum(inp, target)
+res = Solution().threeSum(inp)
 print(res)
