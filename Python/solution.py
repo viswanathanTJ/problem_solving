@@ -13,12 +13,18 @@ class Solution:
         max_right = [0] * n
         
         cur_left = height[0]
+        cur_right = height[-1]
         for i in range(n):
             cur_left = max(height[i], cur_left)
+            cur_right = max(height[n - 1 - i], cur_right)
             max_left[i] = cur_left
+            max_right[n - 1] = cur_right
         
-        print(max_left)
+        ic(max_left)
+        ic(max_right)
 
+        for i in range(n):
+            res += min(max_right[i], max_left[i]) * height[i]
                     
         return res
             
