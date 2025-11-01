@@ -9,26 +9,24 @@ class Solution:
         res = 0
         n = len(height)
         
-        max_left = [0] * n
-        max_right = [0] * n
+        l = 0
+        r = n - 1
         
-        cur_left = height[0]
-        cur_right = height[-1]
-        for i in range(n):
-            cur_left = max(height[i], cur_left)
-            cur_right = max(height[n - 1 - i], cur_right)
-            max_left[i] = cur_left
-            max_right[n - 1] = cur_right
-        
-        ic(max_left)
-        ic(max_right)
+        max_left = -1
+        max_right = -1
 
-        for i in range(n):
-            res += min(max_right[i], max_left[i]) * height[i]
-                    
+        while l <= r:
+            if height[l] < height[r]:
+                max_left = max(max_left, height[l])
+                ic(max_left)
+                res += max_left - height[l]
+                l += 1
+            else:
+                max_right = max(max_right, height[r])
+                res += max_right - height[r]
+                r -= 1
+
         return res
-            
-            
             
             
             
