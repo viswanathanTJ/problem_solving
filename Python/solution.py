@@ -5,30 +5,23 @@ from icecream import ic
 
 class Solution:
 
-    def trap(self, height: List[int]) -> int:
-        res = 0
-        n = len(height)
-        
-        l = 0
-        r = n - 1
-        
-        max_left = -1
-        max_right = -1
+    def rotate(self, nums: List[int], k: int) -> None:
+        if k > len(nums):
+            k = k % len(nums)
 
-        while l <= r:
-            if height[l] < height[r]:
-                max_left = max(max_left, height[l])
-                ic(max_left)
-                res += max_left - height[l]
+        def reverse(arr, l, r): 
+            while l < r:
+                arr[l], arr[r] = arr[r], arr[l]
                 l += 1
-            else:
-                max_right = max(max_right, height[r])
-                res += max_right - height[r]
                 r -= 1
 
-        return res
-            
-            
+        reverse(nums, 0, len(nums) - 1)
+        reverse(nums, 0, k-1) 
+        reverse(nums, k, len(nums) - 1) 
+
+                
+
+        return nums
             
 
 
@@ -36,5 +29,6 @@ class Solution:
          
 # for _ in range(3):
 inp = ast.literal_eval(input())
-res = Solution().trap(inp)
+inp1 = int(input())
+res = Solution().rotate(inp, inp1)
 print(res)
