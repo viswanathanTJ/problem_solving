@@ -2,33 +2,45 @@ from typing import List
 import ast
 from collections import defaultdict, Counter
 from icecream import ic
+import math
 
 class Solution:
 
-    def rotate(self, nums: List[int], k: int) -> None:
-        if k > len(nums):
-            k = k % len(nums)
+    def majorityElement(self, nums):
+        d = defaultdict(int)
 
-        def reverse(arr, l, r): 
-            while l < r:
-                arr[l], arr[r] = arr[r], arr[l]
-                l += 1
-                r -= 1
+        for n in nums:
+            d[n] = d[n] + 1
 
-        reverse(nums, 0, len(nums) - 1)
-        reverse(nums, 0, k-1) 
-        reverse(nums, k, len(nums) - 1) 
+        sorted_d = sorted(d.items(), key = lambda x : x[1], reverse=True)
+        
+        return sorted_d.pop(0)[0]
+        
 
-                
+        pass
 
-        return nums
-            
+    def majorityElementOptimal(self, nums):
+        cnt = 0
+        el = None
+
+        for n in nums:
+            if not el or not cnt:
+                el = n
+                cnt = 1
+            elif el == n:
+                cnt += 1
+            else:
+                cnt -= 1
+
+        return el
+
 
 
         pass
          
 # for _ in range(3):
 inp = ast.literal_eval(input())
-inp1 = int(input())
-res = Solution().rotate(inp, inp1)
+res = Solution().majorityElement(inp)
+# inp1 = int(input())
+# res = Solution().majorityElement(inp, inp1)
 print(res)
