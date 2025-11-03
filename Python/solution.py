@@ -6,31 +6,39 @@ import math
 
 class Solution:
 
-    def rearrangeArray(self, nums):
-        # TC: O(n)
-        # SC: O(n)
-        pind, nind = 0, 1
-        n = len(nums)
-        res = [0] * n
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        res = []
+        top, bottom, left, right = 0, len(matrix) - 1, 0, len(matrix[0]) - 1
         
-        for i in range(n):
-            if nums[i] < 0:
-                if nind < n:
-                    res[nind] = nums[i]
-                    nind += 2
-            else:
-                if pind < n:
-                    res[pind] = nums[i]
-                    pind += 2
+        while top <= bottom and left <= right:
+            
+            for i in range(left, right + 1):
+                res.append(matrix[top][i])
+            
+            top += 1
+            
+            for i in range(top, bottom + 1):
+                res.append(matrix[i][right])
+            
+            right -= 1
+
+            if top <= bottom:
+                for i in range(right, left - 1, - 1):
+                    res.append(matrix[bottom][i])
+                bottom -= 1
+            
+            if left <= right:
+                for i in range(bottom, top - 1, -1):
+                    res.append(matrix[i][left])
+                left += 1
         
         return res
-        
         
         pass
          
 # for _ in range(3):
 inp = ast.literal_eval(input())
-res = Solution().rearrangeArray(inp)
+res = Solution().spiralOrder(inp)
 # inp1 = int(input())
 # res = Solution().majorityElement(inp, inp1)
 print(res)
