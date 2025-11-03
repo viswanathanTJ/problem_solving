@@ -1,1 +1,48 @@
-[7, 0, 0, 1, 7, 7, 2, 7, 7]
+[3,1,-2,-5,2,-4]
+[2, 4, 5, -1, -3, -4]
+
+[-1,-3,-2,-3,1,2,3,4]
+
+
+i = 0
+while i .. n
+pind = 0, nind = 1, i = 0
+
+if num is pos
+    if i is even
+        i += 1
+    else
+        swap nums[i], nums[pind]
+        pind += 2
+else
+    if i is odd
+        i += 1
+    else
+        swap nums[i], nums[nind]
+        nind += 2
+
+
+
+
+
+
+
+
+
+
+if i is even and number is neg
+    swap num to neg ind
+    neg ind += 2
+elif i is odd and num is pos
+    swap num to pos ind
+    pos ind += 2
+else
+    if i is odd and num is neg:
+        i += 1
+    elif i is even and num is pos:
+        i += 1
+        
+
+
+
+
