@@ -6,39 +6,52 @@ import math
 
 class Solution:
 
-    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
-        res = []
-        top, bottom, left, right = 0, len(matrix) - 1, 0, len(matrix[0]) - 1
-        
-        while top <= bottom and left <= right:
-            
-            for i in range(left, right + 1):
-                res.append(matrix[top][i])
-            
-            top += 1
-            
-            for i in range(top, bottom + 1):
-                res.append(matrix[i][right])
-            
-            right -= 1
+    def rearrangeArray(self, nums: List[int]) -> List[int]:
+        pind, nind = 0, 1
 
-            if top <= bottom:
-                for i in range(right, left - 1, - 1):
-                    res.append(matrix[bottom][i])
-                bottom -= 1
-            
-            if left <= right:
-                for i in range(bottom, top - 1, -1):
-                    res.append(matrix[i][left])
-                left += 1
+        for i in range(len(nums)):
+            if nums[i] < 0: # neg
+                if i != nind:
+                    nums[i], nums[nind] = nums[nind], nums[i]
+                nind += 2
+            else: # pos
+                if i != pind:
+                    nums[i], nums[pind] = nums[pind], nums[i]
+                pind += 2
+
+        return nums
+
+
+
+        pass
+
+    def rearrangeArrayBetter(self, nums: List[int]) -> List[int]:
+        # O(n)
+        res = []
+
+        pos = []
+        neg = []
+
+        for n in nums:
+            if n > -1:
+                pos.append(n)
+            else:
+                neg.append(n)
         
+        for p, n in zip(pos, neg):
+            res.append(p)
+            res.append(n)
+
         return res
-        
+
+
+
+
         pass
          
 # for _ in range(3):
 inp = ast.literal_eval(input())
-res = Solution().spiralOrder(inp)
+res = Solution().rearrangeArray(inp)
 # inp1 = int(input())
 # res = Solution().majorityElement(inp, inp1)
 print(res)
