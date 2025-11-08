@@ -6,52 +6,29 @@ import math
 
 class Solution:
 
-    def rearrangeArray(self, nums: List[int]) -> List[int]:
-        pind, nind = 0, 1
+    def pascalTriangleI(self, r, c):
+        n = r
+        r = c
 
-        for i in range(len(nums)):
-            if nums[i] < 0: # neg
-                if i != nind:
-                    nums[i], nums[nind] = nums[nind], nums[i]
-                nind += 2
-            else: # pos
-                if i != pind:
-                    nums[i], nums[pind] = nums[pind], nums[i]
-                pind += 2
-
-        return nums
-
-
-
-        pass
-
-    def rearrangeArrayBetter(self, nums: List[int]) -> List[int]:
-        # O(n)
-        res = []
-
-        pos = []
-        neg = []
-
-        for n in nums:
-            if n > -1:
-                pos.append(n)
-            else:
-                neg.append(n)
+        if r < n - r:
+            r = n - r
+            
+        res = 1
+        for i in range(r):
+            res *= (n - i)
+            ic(n - i)
+            res //= (i + 1)
         
-        for p, n in zip(pos, neg):
-            res.append(p)
-            res.append(n)
-
         return res
-
 
 
 
         pass
          
 # for _ in range(3):
-inp = ast.literal_eval(input())
-res = Solution().rearrangeArray(inp)
-# inp1 = int(input())
-# res = Solution().majorityElement(inp, inp1)
+# inp = ast.literal_eval(input())
+# res = Solution().rearrangeArray(inp)
+inp1 = int(input())
+inp2 = int(input())
+res = Solution().pascalTriangleI(inp1, inp2)
 print(res)
