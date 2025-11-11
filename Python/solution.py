@@ -5,38 +5,48 @@ from icecream import ic
 import math
 
 class Solution:
-    def threeSum(self, nums):
-        nums.sort()
+    
+    def fourSum(self, nums, target):
         res = []
-        print(nums)
-
-        for i in range(len(nums) - 2):
-            if i > 0 and nums[i] == nums[i-1]:
+        nums.sort()
+        
+        for i in range(len(nums) - 3):
+            if (i != 0 and nums[i] == nums[i-1]) or (nums[i]+nums[-1]+nums[-2]+nums[-3] < target):
                 continue
-            l = i + 1
-            h = len(nums) - 1
-            while l < h:
-                addition = nums[i] + nums[l] + nums[h]
-                if addition > 0:
-                    h -= 1
-                elif addition < 0:
-                    l += 1
-                else:
-                    res.append([nums[i], nums[l], nums[h]])
-                    while l < h and nums[l] == nums[l + 1]:
-                        l += 1
-                    while l < h and nums[h] == nums[h - 1]:
-                        h += 1
-                    l += 1
-                    h -= 1
 
+            if nums[i]+nums[i+1]+nums[i+2]+nums[i+3] > target:
+                break
+
+            for j in range(i + 1, len(nums) - 2):
+                if j != i + 1 and nums[j] == nums[j - 1]:
+                    continue
+                k = j + 1
+                h = len(nums) - 1
+                
+                while k < h:
+                    value = nums[i] + nums[j] + nums[k] + nums[h]
+                    if value == target:
+                        res.append([nums[i], nums[j], nums[k], nums[h]])
+                        h -= 1
+                        k += 1
+                        while k < h and nums[k] == nums[k - 1]:
+                            k += 1
+                        while k < h and nums[h] == nums[h + 1]:
+                            h -= 1
+                    elif value > target:
+                        h -= 1
+                    else:
+                        k += 1
+                        
         return res
-
+                
+            
+                
 
 # for _ in range(3):
 inp = ast.literal_eval(input())
-res = Solution().threeSum(inp)
-# inp1 = int(input())
+inp1 = int(input())
+res = Solution().fourSum(inp, inp1)
 # inp2 = int(input())
 # res = Solution().pascalTriangleI(inp1, inp2)
 print(res)
