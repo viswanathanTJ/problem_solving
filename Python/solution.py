@@ -5,48 +5,36 @@ from icecream import ic
 import math
 
 class Solution:
-    
-    def fourSum(self, nums, target):
-        res = []
-        nums.sort()
-        
-        for i in range(len(nums) - 3):
-            if (i != 0 and nums[i] == nums[i-1]) or (nums[i]+nums[-1]+nums[-2]+nums[-3] < target):
-                continue
 
-            if nums[i]+nums[i+1]+nums[i+2]+nums[i+3] > target:
-                break
-
-            for j in range(i + 1, len(nums) - 2):
-                if j != i + 1 and nums[j] == nums[j - 1]:
-                    continue
-                k = j + 1
-                h = len(nums) - 1
+    def sortColors(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        n = len(nums)
+        ind = 0
+        l, r = 0, n - 1
+        while ind <= r:
+            if nums[ind] == 2:
+                nums[ind], nums[r] = nums[r], nums[ind]
+                r -= 1
+            elif nums[ind] == 0:
+                nums[ind], nums[l] = nums[l], nums[ind]
+                l += 1
+                ind += 1
+            else:
+                ind += 1
+        return nums
                 
-                while k < h:
-                    value = nums[i] + nums[j] + nums[k] + nums[h]
-                    if value == target:
-                        res.append([nums[i], nums[j], nums[k], nums[h]])
-                        h -= 1
-                        k += 1
-                        while k < h and nums[k] == nums[k - 1]:
-                            k += 1
-                        while k < h and nums[h] == nums[h + 1]:
-                            h -= 1
-                    elif value > target:
-                        h -= 1
-                    else:
-                        k += 1
-                        
-        return res
+        
+    
                 
             
                 
 
 # for _ in range(3):
 inp = ast.literal_eval(input())
-inp1 = int(input())
-res = Solution().fourSum(inp, inp1)
+# inp1 = int(input())
+res = Solution().sortColors(inp)
 # inp2 = int(input())
 # res = Solution().pascalTriangleI(inp1, inp2)
 print(res)
